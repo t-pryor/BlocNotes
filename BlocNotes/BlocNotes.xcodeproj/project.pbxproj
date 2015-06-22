@@ -17,6 +17,9 @@
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
 		223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD3101B2F2C20003965FA /* BlocNotesTests.m */; };
 		22E526011B31E440005F3421 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526001B31E440005F3421 /* Note.m */; };
+		22E526071B31FC17005F3421 /* NoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526061B31FC16005F3421 /* NoteTests.m */; };
+		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
+		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,10 @@
 		223AD3101B2F2C20003965FA /* BlocNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocNotesTests.m; sourceTree = "<group>"; };
 		22E525FF1B31E440005F3421 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		22E526001B31E440005F3421 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		22E526061B31FC16005F3421 /* NoteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTests.m; sourceTree = "<group>"; };
+		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
+		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
+		22E5260B1B334D7B005F3421 /* NoteStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStoreTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,11 +140,23 @@
 		22E3D8301B30C0BE007DC7AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22E526081B331693005F3421 /* NoteStore.h */,
+				22E526091B331693005F3421 /* NoteStore.m */,
 				22E525FF1B31E440005F3421 /* Note.h */,
 				22E526001B31E440005F3421 /* Note.m */,
 				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
+				22E526051B31F343005F3421 /* Model Tests */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		22E526051B31F343005F3421 /* Model Tests */ = {
+			isa = PBXGroup;
+			children = (
+				22E526061B31FC16005F3421 /* NoteTests.m */,
+				22E5260B1B334D7B005F3421 /* NoteStoreTests.m */,
+			);
+			name = "Model Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223AD2FD1B2F2C20003965FA /* DetailViewController.m in Sources */,
+				22E5260A1B331693005F3421 /* NoteStore.m in Sources */,
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,
 				223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */,
 				22E526011B31E440005F3421 /* Note.m in Sources */,
@@ -254,6 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */,
+				22E526071B31FC17005F3421 /* NoteTests.m in Sources */,
+				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

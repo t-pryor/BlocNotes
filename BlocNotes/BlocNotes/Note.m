@@ -17,4 +17,11 @@
 @dynamic title;
 @dynamic recentlyUpdated;
 
+-(void) awakeFromInsert
+{
+  [super awakeFromInsert];
+  
+}
+
+
 @end
