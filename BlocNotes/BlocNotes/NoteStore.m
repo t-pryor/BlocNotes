@@ -18,6 +18,7 @@
 @end
 
 
+
 @implementation NoteStore
 
 + (instancetype)sharedInstance
@@ -80,6 +81,11 @@
   return self;
 }
 
+- (NSArray *)allNotes
+{
+  return [self.privateNotes copy];
+}
+
 
 - (NSString *)notePath
 {
@@ -102,7 +108,15 @@
   return successful;
 }
 
+# pragma mark - Getters
 
+- (NSArray *)privateNotes
+{
+  if (!_privateNotes) {
+    _privateNotes = [[NSMutableArray alloc]init];
+  }
+  return _privateNotes;
+}
 
 
 - (Note *)createNote
@@ -110,13 +124,11 @@
   Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                              inManagedObjectContext:self.context];
   
-  //[self.privateNotes addObject:note];
-  
+  [self.privateNotes addObject:note];
   return note;
 }
 
 
-/*
 - (void)loadAllNotes
 {
   if (!self.privateNotes) {
@@ -147,33 +159,16 @@
   }
 }
 
-*/
-
-/*
- 
-//inManagedObjectContext:(NSManagedObjectContext *)context //this is in the NoteStore
-+ (Note *)createNoteWithTitle:(NSString *)title body:(NSString *)body
+- (void)removeNote:(Note *)note
 {
+  [self.context deleteObject:note];
+  [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
   
-  Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                             inManagedObjectContext:self.context];
-  note.title = title;
-  note.body = body;
-  
-  return note;
 }
-*/
 
-/*
-- (NSString *)itemArchivePath
-{
-  NSArray *documentDirectories =
-  NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-  
-  // Get one and only document directory from that list
-  NSString *documentDirectory = [documentDirectories firstObject];
-  
-  return [documentDirectory stringByAppendingPathComponent:@"store.data"];
-  
-} */
+
+
+
+
+
 @end

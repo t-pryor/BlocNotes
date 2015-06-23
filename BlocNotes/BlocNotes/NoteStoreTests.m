@@ -55,6 +55,58 @@
   
 }
 
+- (void)testAllNotesGetter
+{
+  Note *testNote0 = [[NoteStore sharedInstance] createNote];
+  Note *testNote1 = [[NoteStore sharedInstance] createNote];
+  Note *testNote2 = [[NoteStore sharedInstance] createNote];
+  
+  XCTAssertEqualObjects(testNote0, [[[NoteStore sharedInstance] allNotes] firstObject]);
+  XCTAssertEqualObjects(testNote1, [[[NoteStore sharedInstance] allNotes] objectAtIndex:1]);
+  XCTAssertEqualObjects(testNote2, [[[NoteStore sharedInstance] allNotes] objectAtIndex:2]);
+
+}
+
+- (void)testSaveChanges
+{
+ 
+  [[NoteStore sharedInstance] createNote];
+  [[NoteStore sharedInstance] createNote];
+  [[NoteStore sharedInstance] createNote];
+  
+  BOOL successful = [[NoteStore sharedInstance] saveChanges];
+  
+  XCTAssertEqual(successful, YES);
+  
+}
+
+
+
+- (void)testLoadAllNotes
+{
+  
+  [[NoteStore sharedInstance] createNote];
+  [[NoteStore sharedInstance] createNote];
+  [[NoteStore sharedInstance] createNote];
+  
+  BOOL successful = [[NoteStore sharedInstance] saveChanges];
+  
+  XCTAssertEqual(successful, YES);
+  
+  
+}
+
+- (void)testRemoveNote
+{
+  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 0);
+  
+  Note *testNote = [[NoteStore sharedInstance] createNote];
+  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 1);
+  
+  [[NoteStore sharedInstance] removeNote:testNote];
+  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 0);
+  
+}
 
 
 

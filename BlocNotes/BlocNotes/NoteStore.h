@@ -13,8 +13,11 @@
 
 @interface NoteStore : NSObject
 
-+ (instancetype)sharedInstance;
+@property (nonatomic, readonly) NSArray *allNotes;
 
++ (instancetype)sharedInstance;
 - (Note *)createNote;
+- (BOOL) saveChanges;
+- (void) removeNote: (Note *)note;
 
 @end
