@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "NoteStore.h"
+#import "MasterViewController.h"
 
 @interface MasterViewControllerTests : XCTestCase
 
@@ -28,11 +28,27 @@
 
 - (void)testNSFetchedResultsControllerInitialization
 {
+  MasterViewController *testMasterVC = [[MasterViewController alloc ]init];
   
-//  NSFetchedResultsController *testFetchedResultsController = [[NoteStore sharedInstance] fetchedResultsController];
+  NSFetchedResultsController *testFetchedResultsController = [testMasterVC fetchedResultsController];
   
+  XCTAssertNotNil(testFetchedResultsController);
+  XCTAssertNotNil(testFetchedResultsController.cacheName);
+  XCTAssertNotNil(testFetchedResultsController.delegate);
   
 }
+
+- (void)testNumberOfRowsInTableView
+{
+  
+  MasterViewController *testMasterVC = [[MasterViewController alloc ]init];
+  
+  NSFetchedResultsController *testFetchedResultsController = [testMasterVC fetchedResultsController];
+  
+ // testMasterVC numberOfSectionsInTableView:<#(UITableView *)#>
+  
+}
+
 
 
 

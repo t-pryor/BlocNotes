@@ -12,6 +12,7 @@
 @interface NoteStore ()
 
 @property (nonatomic) NSMutableArray *privateNotes;
+@property (nonatomic, strong) NSManagedObjectModel *model;
 
 @end
 

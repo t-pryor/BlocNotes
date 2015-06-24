@@ -14,6 +14,10 @@
 
 @end
 
+
+
+
+
 @implementation MasterViewController
 
 - (void)awakeFromNib {
@@ -40,13 +44,14 @@
 }
 
 - (void)insertNewObject:(id)sender {
+  
   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
   NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
   NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
       
   // If appropriate, configure the new managed object.
   // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-  [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
+  [newManagedObject setValue:[NSString string] forKey:@"title"];
       
   // Save the context.
   NSError *error = nil;
@@ -71,7 +76,9 @@
   }
 }
 
+
 #pragma mark - Table View
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return [[self.fetchedResultsController sections] count];
@@ -81,6 +88,7 @@
   id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
   return [sectionInfo numberOfObjects];
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
@@ -108,9 +116,12 @@
   }
 }
 
+
+ 
+//13-9minstanford
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+  cell.textLabel.text = [[object valueForKey:@"title"] description];
 }
 
 #pragma mark - Fetched results controller
@@ -122,42 +133,22 @@
         return _fetchedResultsController;
     }
   
+    NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createFetchRequest];
+ 
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] context] sectionNameKeyPath:nil cacheName:@"Master"]; //11min
   
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-  
-  //NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:[NoteStore sharedInstance] context];
-  
-  
-  
-  
-  
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
+  
     self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
+  
+    NSError *error = nil;
+  
+    if (![self.fetchedResultsController performFetch:&error]) {
 	     // Replace this implementation with code to handle the error appropriately.
 	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
 	}
-    
     return _fetchedResultsController;
 }    
 
@@ -187,7 +178,6 @@
             return;
     }
 }
-
 
 //stanford:13-11min
 - (void)controller:(NSFetchedResultsController *)controller
@@ -223,14 +213,13 @@
     [self.tableView endUpdates];
 }
 
-/*
 // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+/*
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     // In the simplest, most efficient, case, reload the table view.
     [self.tableView reloadData];
 }
- */
+*/
 
 @end

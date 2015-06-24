@@ -15,7 +15,7 @@
 
 @property (nonatomic, readonly) NSArray *allNotes;
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSManagedObjectModel *model;
+
 
 
 + (instancetype)sharedInstance;
