@@ -108,6 +108,24 @@
   
 }
 
+- (void)testCreateFetchRequest
+{
+  NSFetchRequest *testRequest = [[NoteStore sharedInstance] createFetchRequest];
+  
+  XCTAssertNotNil(testRequest);
+  XCTAssertEqualObjects([testRequest class], [NSFetchRequest class]);
+  XCTAssertNotNil([testRequest entity]);
+  XCTAssertTrue([[testRequest sortDescriptors] count] > 0);
+  
+}
+
+- (void)testFetchRequestInitialization
+{
+  
+}
+
+
+
 
 
 

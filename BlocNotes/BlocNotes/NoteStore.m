@@ -12,8 +12,6 @@
 @interface NoteStore ()
 
 @property (nonatomic) NSMutableArray *privateNotes;
-@property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSManagedObjectModel *model;
 
 @end
 
@@ -50,7 +48,7 @@
   self = [super init];
   if (self) {
     // Read in xcdatamodeld
-    _model = [NSManagedObjectModel mergedModelFromBundles:nil];
+    self.model = [NSManagedObjectModel mergedModelFromBundles:nil];
     
     NSLog(@"******* NSEntityDescription: %@", [self.model entities] );
     
@@ -74,11 +72,20 @@
     }
     
     // Create the managed object context
-    _context = [[NSManagedObjectContext alloc]init];
-    _context.persistentStoreCoordinator = psc;
-    
+    //_context = [[NSManagedObjectContext alloc]init];
+    self.context.persistentStoreCoordinator = psc;
+    NSLog(@" ");
   }
   return self;
+}
+
+- (NSManagedObjectContext *)context
+{
+  if (!_context) {
+    _context = [[NSManagedObjectContext alloc]init];
+    
+  }
+  return _context;
 }
 
 - (NSArray *)allNotes
@@ -163,6 +170,25 @@
 {
   [self.context deleteObject:note];
   [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
+  
+}
+
+- (NSFetchRequest *)createFetchRequest
+{
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+  [fetchRequest setEntity:entity];
+  
+  // Set the batch size to a suitable number.
+  [fetchRequest setFetchBatchSize:20];
+  
+  // Edit the sort key as appropriate.
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
+  NSArray *sortDescriptors = @[sortDescriptor];
+  
+  [fetchRequest setSortDescriptors:sortDescriptors];
+  
+  return fetchRequest;
   
 }
 

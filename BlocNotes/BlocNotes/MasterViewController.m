@@ -121,9 +121,17 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
+  
+  
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
+  
+  //NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:[NoteStore sharedInstance] context];
+  
+  
+  
+  
+  
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
