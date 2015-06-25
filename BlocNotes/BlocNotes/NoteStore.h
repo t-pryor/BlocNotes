@@ -26,4 +26,7 @@
 - (NSFetchRequest *)createFetchRequest;
 
 
+- (void)loadAllNotes;
+
+
 @end

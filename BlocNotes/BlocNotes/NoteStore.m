@@ -106,6 +106,7 @@
   return [documentDirectory stringByAppendingPathComponent:@"store.data"];
 }
 
+
 - (BOOL)saveChanges //should call when moving to background
 {
   NSError *error;
@@ -116,15 +117,9 @@
   return successful;
 }
 
+
 # pragma mark - Getters
 
-- (NSArray *)privateNotes
-{
-  if (!_privateNotes) {
-    _privateNotes = [[NSMutableArray alloc]init];
-  }
-  return _privateNotes;
-}
 
 
 - (Note *)createNote
@@ -151,19 +146,20 @@
     // [request setPredicate:p]
     //
     
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"orderingValue"
-                                                         ascending:YES];
-    fetchRequest.sortDescriptors = @[sd];
+   // NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"orderingValue"
+                                                         //ascending:YES];
+   // fetchRequest.sortDescriptors = @[sd];
     
     NSError *error;
+    
     NSArray *notes = [self.context executeFetchRequest:fetchRequest error:&error];
+  
     if (!notes) {
       [NSException raise:@"Fetch failed"
                   format:@"Reason: %@", [error localizedDescription]];
     }
     
     self.privateNotes = [[NSMutableArray alloc] initWithArray:notes];
-    
   }
 }
 

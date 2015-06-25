@@ -85,6 +85,9 @@
 - (void)testLoadAllNotes
 {
   
+  [[NoteStore sharedInstance] loadAllNotes];
+  
+  
   [[NoteStore sharedInstance] createNote];
   [[NoteStore sharedInstance] createNote];
   [[NoteStore sharedInstance] createNote];
@@ -92,6 +95,10 @@
   BOOL successful = [[NoteStore sharedInstance] saveChanges];
   
   XCTAssertEqual(successful, YES);
+  
+  [[NoteStore sharedInstance]loadAllNotes];
+  
+  XCTAssertEqual([[[NoteStore sharedInstance] allNotes] count], 3);
   
   
 }
