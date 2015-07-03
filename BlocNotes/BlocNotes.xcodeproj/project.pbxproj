@@ -17,6 +17,7 @@
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
 		223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD3101B2F2C20003965FA /* BlocNotesTests.m */; };
 		22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */; };
+		22DA5CFF1B3C599500614675 /* Note+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA5CFE1B3C599500614675 /* Note+Utilities.m */; };
 		22E526011B31E440005F3421 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526001B31E440005F3421 /* Note.m */; };
 		22E526071B31FC17005F3421 /* NoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526061B31FC16005F3421 /* NoteTests.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
@@ -51,6 +52,8 @@
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223AD3101B2F2C20003965FA /* BlocNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocNotesTests.m; sourceTree = "<group>"; };
 		22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewControllerTests.m; sourceTree = "<group>"; };
+		22DA5CFD1B3C599500614675 /* Note+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+Utilities.h"; sourceTree = "<group>"; };
+		22DA5CFE1B3C599500614675 /* Note+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+Utilities.m"; sourceTree = "<group>"; };
 		22E525FF1B31E440005F3421 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		22E526001B31E440005F3421 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		22E526061B31FC16005F3421 /* NoteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTests.m; sourceTree = "<group>"; };
@@ -152,11 +155,13 @@
 		22E3D8301B30C0BE007DC7AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
 				22E526081B331693005F3421 /* NoteStore.h */,
 				22E526091B331693005F3421 /* NoteStore.m */,
 				22E525FF1B31E440005F3421 /* Note.h */,
 				22E526001B31E440005F3421 /* Note.m */,
-				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
+				22DA5CFD1B3C599500614675 /* Note+Utilities.h */,
+				22DA5CFE1B3C599500614675 /* Note+Utilities.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22DA5CFF1B3C599500614675 /* Note+Utilities.m in Sources */,
 				223AD2FD1B2F2C20003965FA /* DetailViewController.m in Sources */,
 				22E5260A1B331693005F3421 /* NoteStore.m in Sources */,
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,

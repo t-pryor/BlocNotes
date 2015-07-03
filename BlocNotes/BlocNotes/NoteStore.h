@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "Note.h"
 
+#define SHAREDSTORE [NoteStore sharedInstance];
+
 @interface NoteStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allNotes;
@@ -21,12 +23,24 @@
 + (instancetype)sharedInstance;
 - (Note *)createNote;
 - (BOOL) saveChanges;
-- (void) removeNote: (Note *)note;
+- (void) deleteNote: (Note *)note;
+- (void) deleteNoteWithTitle: (NSString *) title;
 
 - (NSFetchRequest *)createFetchRequest;
 
 
 - (void)loadAllNotes;
+
+
+- (Note *)createNoteWithTitle:(NSString *)title
+                      andBody:(NSString *)body;
+
+- (Note *)fetchNoteWithTitle:(NSString *)title;
+
+- (Note *)editNoteWithTitle:(NSString *)title
+                   withNewBody:(NSString *)body;
+
+
 
 
 @end

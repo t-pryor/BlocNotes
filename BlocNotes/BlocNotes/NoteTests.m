@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "Note.h"
+#import "Note+Utilities.h"
+#import "NoteStore.h"
 
 @interface NoteTests : XCTestCase
 
@@ -32,36 +35,48 @@
 
 - (void)testThatNoteIsCreatedCorrectly
 {
-  
-//  NSString *testTitle = @"Test Title";
-//  NSString *testBody = @"Test Body";
-//  NSManagedObjectContext *testContext = [[NSManagedObjectContext alloc]init];
-//  
-//  Note *sampleNote = [Note createNoteWithTitle:testTitle body:testBody inManagedObjectContext:testContext];
-//
-//  XCTAssertEqualObjects(testTitle, sampleNote.title);
-//  XCTAssertEqualObjects(testBody, sampleNote.body);
-//  
-  
-  
+
+  Note *testNote = [Note createNoteWithTitle:@"test title 1" andBody:@"this is just a test body 1"];
+
+  XCTAssertEqualObjects(testNote.title, @"test title 1");
+  XCTAssertEqualObjects(testNote.body , @"this is just a test body 1");
+  XCTAssertTrue(testNote.dateCreated);
+
 }
 
-- (void)testThatNoteIsRetrievedCorrectly
+
+//- (void)testRetrieveNoteWithTitle
+//{
+//  
+//  Note *testNote = [Note createNoteWithTitle:@"test title 2" andBody:@"this is just a test body 2"];
+//
+//  [[NoteStore sharedInstance] saveChanges];
+//  
+//  
+//  Note *retrievedTestNote = [Note retrieveNoteWithTitle:@"test title 2"];
+//  
+//  XCTAssertEqualObjects(retrievedTestNote.title, @"test title 2");
+//  
+//  
+//  
+//}
+
+/*
+- (void)testThatNoteCanBeModifiedCorrectly
 {
   
+  Note *testNote = [Note editNoteWithTitle:@"test title 2" andBody:@"this is just a test body 2"];
+  
+  
+
 }
 
+*/
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+
+
+
+
 
 @end

@@ -9,6 +9,8 @@
 #import "NoteStore.h"
 #import "Note.h"
 
+
+
 @interface NoteStore ()
 
 @property (nonatomic) NSMutableArray *privateNotes;
@@ -132,6 +134,44 @@
 }
 
 
+
+- (Note *)createNoteWithTitle: (NSString *)title
+                      andBody: (NSString *)body
+{
+  Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                             inManagedObjectContext:self.context];
+
+  note.title = title;
+  note.body = body;
+  note.dateCreated = [NSDate timeIntervalSinceReferenceDate];
+  
+  [self.privateNotes addObject:note];
+  
+  return note;
+}
+
+
+
+// should this be an NSArray? Is this unique?
+- (Note *)fetchNoteWithTitle: (NSString *)title
+{
+  
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+  NSEntityDescription *e = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+  fetchRequest.entity = e;
+  
+  NSPredicate *p = [NSPredicate predicateWithFormat:@"title = %@", title];
+  [fetchRequest setPredicate:p];
+  
+  NSArray *result = [self.context executeFetchRequest:fetchRequest error:nil];
+  
+  return [result firstObject];
+  
+}
+
+
+
+
 - (void)loadAllNotes
 {
   if (!self.privateNotes) {
@@ -163,12 +203,37 @@
   }
 }
 
-- (void)removeNote:(Note *)note
+- (void)deleteNote:(Note *)note
 {
   [self.context deleteObject:note];
   [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
+  note = nil;
   
 }
+
+- (void) deleteNoteWithTitle: (NSString *) title
+{
+  
+    for (Note *note in self.privateNotes) {
+        if ([note.title isEqualToString:title]) {
+            [self.context deleteObject:note];
+            [self.privateNotes removeObjectIdenticalTo:note];
+            break; 
+        }
+    }
+    
+    
+    
+}
+
+- (Note *)editNoteWithTitle:(NSString *)title withNewBody:(NSString *)body
+{
+    
+    [self deleteNoteWithTitle:title];
+    
+    return [self createNoteWithTitle:title andBody:body];
+}
+
 
 - (NSFetchRequest *)createFetchRequest
 {

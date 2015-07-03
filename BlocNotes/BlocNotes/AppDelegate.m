@@ -18,32 +18,48 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
-  
-  // Override point for customization after application launch.
-  UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-  UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-  navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-  splitViewController.delegate = self;
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//  
+//    // Override point for customization after application launch.
+//    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+//    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+//    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+//    splitViewController.delegate = self;
+//
+//    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+//    MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
+//
+//    
+//    
+//    
+//    
+//    controller.managedObjectContext = [[NoteStore sharedInstance] context];
+//  
+//    
+//
+//    [NoteStore sharedInstance];
+//    //Initialize NoteStore and load all notes from DB
+//    [[NoteStore sharedInstance] loadAllNotes];
+//  
+//  
+//  
+//  
+//  
+//  
+//  return YES;
+//}
 
-  
-  UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-  MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
-  
-  [NoteStore sharedInstance];
-  
-  controller.managedObjectContext = [[NoteStore sharedInstance] context];
-  
-  //Initialize NoteStore and load all notes from DB
-  [[NoteStore sharedInstance] loadAllNotes];
-  
-  
-  
-  
-  
-  
-  return YES;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    splitViewController.delegate = self;
+    
+    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+    MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
+    controller.managedObjectContext = self.managedObjectContext;
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -70,7 +86,7 @@
   [self saveContext];
 }
 
-#pragma mark - Split view
+#pragma mark - Split View Delegate
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
     if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
@@ -84,7 +100,7 @@
 
 
 
-/*
+
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -164,5 +180,5 @@
         }
     }
 }
-*/
+
 @end

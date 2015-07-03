@@ -19,11 +19,27 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+  
+    [[NoteStore sharedInstance]createNoteWithTitle:@"Test Note A" andBody:@"Test Note Body A"];
+    [[NoteStore sharedInstance]createNoteWithTitle:@"Test Note B" andBody:@"Test Note Body B"];
+    [[NoteStore sharedInstance]createNoteWithTitle:@"Test Note C" andBody:@"Test Note Body C"];
+    [[NoteStore sharedInstance]createNoteWithTitle:@"Test Note D" andBody:@"Test Note Body D"];
+    [[NoteStore sharedInstance]createNoteWithTitle:@"Test Note E" andBody:@"Test Note Body E"];
+  
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    
+//    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Note A"];
+//    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Note B"];
+//    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Note C"];
+//    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Note D"];
+//    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Note E"];
+    
+
+    
 }
 
 
@@ -98,21 +114,69 @@
   
   [[NoteStore sharedInstance]loadAllNotes];
   
-  XCTAssertEqual([[[NoteStore sharedInstance] allNotes] count], 3);
+  //XCTAssertEqual([[[NoteStore sharedInstance] allNotes] count], 3);
   
   
 }
 
-- (void)testRemoveNote
+- (void)testCreateNoteWithTitleAndBody
 {
-  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 0);
+  Note *testNote = [[NoteStore sharedInstance] createNoteWithTitle:@"test title 1" andBody:@"this is just a test body 1"];
   
-  Note *testNote = [[NoteStore sharedInstance] createNote];
-  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 1);
+  XCTAssertEqualObjects(testNote.title, @"test title 1");
+  XCTAssertEqualObjects(testNote.body , @"this is just a test body 1");
+  XCTAssertTrue(testNote.dateCreated);
   
-  [[NoteStore sharedInstance] removeNote:testNote];
-  XCTAssertEqual([[[NoteStore sharedInstance] allNotes]count], 0);
+}
+
+- (void)testFetchNoteWithTitle
+{
+  [[NoteStore sharedInstance] createNoteWithTitle:@"test title 2" andBody:@"this is just a test body 2"];
   
+  Note *fetchedTestNote = [[NoteStore sharedInstance] fetchNoteWithTitle:@"test title 2"];
+  
+  XCTAssertEqualObjects(fetchedTestNote.title, @"test title 2");
+  
+  
+}
+
+
+
+
+
+
+- (void)testDeleteNote
+{
+
+  Note *testNote1 = [[[NoteStore sharedInstance]allNotes]lastObject];
+  Note *testNote2 = [[[NoteStore sharedInstance]allNotes]lastObject];
+  
+  XCTAssertEqualObjects(testNote1, testNote2);
+  NSLog(@"TEST NOTE1 TITLE:  %@", testNote1.title);
+  
+  [[NoteStore sharedInstance] deleteNote:testNote1];
+  NSLog(@"TEST NOTE1 TITLE:  %@", testNote1.title);
+
+  
+  testNote1 = [[[NoteStore sharedInstance]allNotes]lastObject];
+  NSLog(@"TEST NOTE1 TITLE:  %@", testNote1.title);
+  
+  XCTAssertNotEqualObjects(testNote1, testNote2);
+  
+  NSLog(@"******************");
+  NSLog(@"ALL NOTES COUNT:  %d", [[[NoteStore sharedInstance] allNotes]count]);
+  
+}
+
+- (void)testDeleteNoteWithTitle //15:22:59
+{
+    [[NoteStore sharedInstance] createNoteWithTitle:@"Test Delete Note" andBody: @"Test Delete Note Body"];
+    
+    XCTAssertNotNil([[NoteStore sharedInstance]fetchNoteWithTitle:@"Test Delete Note"]);
+    
+    [[NoteStore sharedInstance]deleteNoteWithTitle:@"Test Delete Note"];
+    
+    XCTAssertNil([[NoteStore sharedInstance]fetchNoteWithTitle:@"Test Delete Note"]);
 }
 
 - (void)testCreateFetchRequest
@@ -126,10 +190,22 @@
   
 }
 
-- (void)testFetchRequestInitialization
+- (void)testEditNoteWithTitle
 {
-  
+    Note *testNote = [[NoteStore sharedInstance]fetchNoteWithTitle:@"Test Note C"];
+    
+    XCTAssertEqualObjects(testNote.body, @"Test Note Body C");
+    
+    
+    [[NoteStore sharedInstance] editNoteWithTitle:@"Test Note C"
+     withNewBody:@"Test Note Body NEW C"];
+    
+    testNote = [[NoteStore sharedInstance]fetchNoteWithTitle:@"Test Note C"];
+    
+    XCTAssertNotEqualObjects(testNote.body, @"Test Note Body C");
+    
 }
+
 
 
 
