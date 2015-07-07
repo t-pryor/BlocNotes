@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		223580FB1B4AC0340096646D /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 223580FA1B4AC0340096646D /* Note.m */; };
+		223581411B4C5A6A0096646D /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 223581401B4C5A6A0096646D /* Note.m */; };
 		223AD2F11B2F2C20003965FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F01B2F2C20003965FA /* main.m */; };
 		223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F31B2F2C20003965FA /* AppDelegate.m */; };
 		223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */; };
@@ -33,8 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		223580F91B4AC0340096646D /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		223580FA1B4AC0340096646D /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		2235813F1B4C5A6A0096646D /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		223581401B4C5A6A0096646D /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		223AD2EB1B2F2C20003965FA /* BlocNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD2EF1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223AD2F01B2F2C20003965FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -150,8 +150,8 @@
 		22E3D8301B30C0BE007DC7AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				223580F91B4AC0340096646D /* Note.h */,
-				223580FA1B4AC0340096646D /* Note.m */,
+				2235813F1B4C5A6A0096646D /* Note.h */,
+				223581401B4C5A6A0096646D /* Note.m */,
 				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
 				22E526081B331693005F3421 /* NoteStore.h */,
 				22E526091B331693005F3421 /* NoteStore.m */,
@@ -273,7 +273,7 @@
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,
 				223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */,
 				223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */,
-				223580FB1B4AC0340096646D /* Note.m in Sources */,
+				223581411B4C5A6A0096646D /* Note.m in Sources */,
 				223AD2F11B2F2C20003965FA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,8 +20,6 @@
 
 @end
 
-
-
 @implementation NoteStore
 
 
@@ -127,10 +125,10 @@
 
 - (Note *)createNoteWithBody:(NSString *)body
 {
-    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+    Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     note.body = body;
-    note.dateCreated = [NSDate timeIntervalSinceReferenceDate];
+    note.dateCreated = [NSDate date];
     [self.privateNotes addObject:note];
     
     return note;
