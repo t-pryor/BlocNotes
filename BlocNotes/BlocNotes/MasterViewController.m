@@ -122,8 +122,8 @@
 }
 
 #pragma mark - Fetched results controller
-//stanford:13-7min
-//stanford:13-11:NSFRC delegate-watch CD, and change table
+
+
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController != nil) {
@@ -132,7 +132,7 @@
   
     NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
                                     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] context] sectionNameKeyPath:nil cacheName:@"Master"]; //11min
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Master"]; //11min
   
     aFetchedResultsController.delegate = self;
   
@@ -147,8 +147,8 @@
       abort();
 	}
     
+    // take initial fetched objects and load into NoteStore
     [[NoteStore sharedInstance] loadNotesFromInitialFetchIntoStore:[self.fetchedResultsController fetchedObjects]];
-    
     
     return _fetchedResultsController;
 }    
@@ -180,7 +180,6 @@
     }
 }
 
-//stanford:13-11min
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath

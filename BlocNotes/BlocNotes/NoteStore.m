@@ -14,13 +14,16 @@
 @interface NoteStore ()
 
 @property (nonatomic) NSMutableArray *privateNotes;
-@property (nonatomic, strong) NSManagedObjectModel *model;
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 @end
 
 
 
 @implementation NoteStore
+
 
 + (instancetype)sharedInstance
 {
@@ -50,46 +53,39 @@
 {
   self = [super init];
   if (self) {
-    // Read in xcdatamodeld
-    self.model = [NSManagedObjectModel mergedModelFromBundles:nil];
-    
-    NSLog(@"******* NSEntityDescription: %@", [self.model entities] );
-    
-    NSPersistentStoreCoordinator *psc =
-    [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
-    
-    // Where does the SQLite file go?
-    NSString *path = [self notePath];
-    NSURL *storeURL = [NSURL fileURLWithPath:path];
-    
-    NSError *error;
-    
-    if (![psc addPersistentStoreWithType:NSSQLiteStoreType
-                           configuration:nil
-                                     URL:storeURL
-                                 options:nil
-                                   error:&error]) {
-      
-      [NSException raise:@"Open Failurez"
-                  format:@"%@",[error localizedDescription]];
-    }
-    
-    // Create the managed object context
-    //_context = [[NSManagedObjectContext alloc]init];
-    self.context.persistentStoreCoordinator = psc;
-    NSLog(@" ");
+//    // Read in xcdatamodeld
+//    self.managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+//    
+//    NSLog(@"******* NSEntityDescription: %@", [self.managedObjectModel entities] );
+//    
+//    NSPersistentStoreCoordinator *psc =
+//    [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+//    
+//    // Where does the SQLite file go?
+//    NSString *path = [self notePath];
+//    NSURL *storeURL = [NSURL fileURLWithPath:path];
+//    
+//    NSError *error;
+//    
+//    if (![psc addPersistentStoreWithType:NSSQLiteStoreType
+//                           configuration:nil
+//                                     URL:storeURL
+//                                 options:nil
+//                                   error:&error]) {
+//      
+//      [NSException raise:@"Open Failurez"
+//                  format:@"%@",[error localizedDescription]];
+//    }
+//    
+//    // Create the managed object context
+//    //_managedObjectContext = [[NSManagedObjectContext alloc]init];
+//    self.managedObjectContext.persistentStoreCoordinator = psc;
+   // NSLog(@" ");
   }
   return self;
 }
 
-- (NSManagedObjectContext *)context
-{
-  if (!_context) {
-    _context = [[NSManagedObjectContext alloc]init];
-    
-  }
-  return _context;
-}
+
 
 - (NSArray *)allNotes
 {
@@ -112,7 +108,7 @@
 - (BOOL)saveChanges //should call when moving to background
 {
   NSError *error;
-  BOOL successful = [self.context save:&error];
+  BOOL successful = [self.managedObjectContext save:&error];
   if (!successful) {
     NSLog(@"Error saving: %@", [error localizedDescription]);
   }
@@ -123,7 +119,7 @@
 - (Note *)createNote
 {
   Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                             inManagedObjectContext:self.context];
+                                             inManagedObjectContext:self.managedObjectContext];
   
   [self.privateNotes addObject:note];
   return note;
@@ -132,7 +128,7 @@
 - (Note *)createNoteWithBody:(NSString *)body
 {
     Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                               inManagedObjectContext:self.context];
+                                               inManagedObjectContext:self.managedObjectContext];
     note.body = body;
     note.dateCreated = [NSDate timeIntervalSinceReferenceDate];
     [self.privateNotes addObject:note];
@@ -143,7 +139,7 @@
 - (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize predicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDescriptors
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     
@@ -157,7 +153,7 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     NSError *error = nil;
-    NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) {
         NSLog(@"Problem! %@", error);
     }
@@ -166,47 +162,18 @@
 
 }
 
-- (void)loadAllNotes
-{
-  if (!self.privateNotes) {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" // entity = table
-                                              inManagedObjectContext:self.context]; //database layer
-    fetchRequest.entity = entity;
-  
-    NSError *error;
-    NSArray *notes = [self.context executeFetchRequest:fetchRequest error:&error];
-  
-    if (!notes) {
-      [NSException raise:@"Fetch failed"
-                  format:@"Reason: %@", [error localizedDescription]];
-    }
-    
-    self.privateNotes = [[NSMutableArray alloc] initWithArray:notes];
-  }
-}
-
-
 - (void)deleteNote:(Note *)note
 {
-  [self.context deleteObject:note];
+  [self.managedObjectContext deleteObject:note];
   [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
   note = nil;
   
 }
 
-
-//-----------------
-// @name
-//
-
-
-
 - (NSFetchRequest *)createInitialFetchRequest
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -222,19 +189,6 @@
 }
 
 
-
-/**
-    Loads the privateNotes array with Notes from the original fetch.
- 
-    The NSFetchController in MasterViewController calls this method after 
-    it calls performFetch. It passes in its fetchedObjects array.
-
-    @param notes The array of notes retrieved by Core Data during
- 
-    @see MasterViewController:
- */
-
-
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes
 {
     self.privateNotes = [[NSMutableArray alloc] initWithArray:notes];
@@ -242,6 +196,88 @@
 }
 
 
+
+#pragma mark - Core Data stack
+
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+- (NSURL *)applicationDocumentsDirectory {
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "io.medux.BlocNotes" in the application's documents directory.
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    // Create the coordinator and store
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BlocNotes.sqlite"];
+    NSError *error = nil;
+    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        // Report any error we got.
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
+        dict[NSUnderlyingErrorKey] = error;
+        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        // Replace this with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+
+- (NSManagedObjectContext *)managedObjectContext {
+    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    return _managedObjectContext;
+}
+
+
+
+#pragma mark - Core Data Saving support
+
+- (void)saveContext {
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
 
 
 

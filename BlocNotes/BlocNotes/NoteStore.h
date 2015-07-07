@@ -16,13 +16,13 @@
 @interface NoteStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allNotes;
-@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 
 
 + (instancetype)sharedInstance;
 - (Note *)createNote;
-- (BOOL) saveChanges;
+- (void)saveContext;
 - (void) deleteNote: (Note *)note;
 
 

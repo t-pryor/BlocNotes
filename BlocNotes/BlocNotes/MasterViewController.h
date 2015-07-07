@@ -20,7 +20,7 @@
 
 
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext; //access from store
+//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext; //access from store
 
 
 @end 
