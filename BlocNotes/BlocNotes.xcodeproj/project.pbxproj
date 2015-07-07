@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		223580FB1B4AC0340096646D /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 223580FA1B4AC0340096646D /* Note.m */; };
 		223AD2F11B2F2C20003965FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F01B2F2C20003965FA /* main.m */; };
 		223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F31B2F2C20003965FA /* AppDelegate.m */; };
 		223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */; };
@@ -17,9 +18,6 @@
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
 		223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD3101B2F2C20003965FA /* BlocNotesTests.m */; };
 		22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */; };
-		22DA5CFF1B3C599500614675 /* Note+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA5CFE1B3C599500614675 /* Note+Utilities.m */; };
-		22E526011B31E440005F3421 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526001B31E440005F3421 /* Note.m */; };
-		22E526071B31FC17005F3421 /* NoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526061B31FC16005F3421 /* NoteTests.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
 /* End PBXBuildFile section */
@@ -35,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		223580F91B4AC0340096646D /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		223580FA1B4AC0340096646D /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		223AD2EB1B2F2C20003965FA /* BlocNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD2EF1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223AD2F01B2F2C20003965FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,11 +52,6 @@
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223AD3101B2F2C20003965FA /* BlocNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocNotesTests.m; sourceTree = "<group>"; };
 		22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewControllerTests.m; sourceTree = "<group>"; };
-		22DA5CFD1B3C599500614675 /* Note+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+Utilities.h"; sourceTree = "<group>"; };
-		22DA5CFE1B3C599500614675 /* Note+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+Utilities.m"; sourceTree = "<group>"; };
-		22E525FF1B31E440005F3421 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		22E526001B31E440005F3421 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
-		22E526061B31FC16005F3421 /* NoteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTests.m; sourceTree = "<group>"; };
 		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
 		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
 		22E5260B1B334D7B005F3421 /* NoteStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStoreTests.m; sourceTree = "<group>"; };
@@ -155,13 +150,11 @@
 		22E3D8301B30C0BE007DC7AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				223580F91B4AC0340096646D /* Note.h */,
+				223580FA1B4AC0340096646D /* Note.m */,
 				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
 				22E526081B331693005F3421 /* NoteStore.h */,
 				22E526091B331693005F3421 /* NoteStore.m */,
-				22E525FF1B31E440005F3421 /* Note.h */,
-				22E526001B31E440005F3421 /* Note.m */,
-				22DA5CFD1B3C599500614675 /* Note+Utilities.h */,
-				22DA5CFE1B3C599500614675 /* Note+Utilities.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -169,7 +162,6 @@
 		22E526051B31F343005F3421 /* Model Tests */ = {
 			isa = PBXGroup;
 			children = (
-				22E526061B31FC16005F3421 /* NoteTests.m */,
 				22E5260B1B334D7B005F3421 /* NoteStoreTests.m */,
 			);
 			name = "Model Tests";
@@ -276,13 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22DA5CFF1B3C599500614675 /* Note+Utilities.m in Sources */,
 				223AD2FD1B2F2C20003965FA /* DetailViewController.m in Sources */,
 				22E5260A1B331693005F3421 /* NoteStore.m in Sources */,
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,
 				223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */,
-				22E526011B31E440005F3421 /* Note.m in Sources */,
 				223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */,
+				223580FB1B4AC0340096646D /* Note.m in Sources */,
 				223AD2F11B2F2C20003965FA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +284,6 @@
 			files = (
 				22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */,
 				223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */,
-				22E526071B31FC17005F3421 /* NoteTests.m in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

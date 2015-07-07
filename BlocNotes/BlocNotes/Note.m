@@ -2,7 +2,7 @@
 //  Note.m
 //  BlocNotes
 //
-//  Created by Tim Pryor on 2015-06-17.
+//  Created by Tim Pryor on 2015-07-06.
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
@@ -12,16 +12,8 @@
 @implementation Note
 
 @dynamic body;
-@dynamic dateModified;
 @dynamic dateCreated;
-@dynamic title;
+@dynamic dateModified;
 @dynamic recentlyUpdated;
-
--(void) awakeFromInsert
-{
-  [super awakeFromInsert];
-  
-}
-
 
 @end

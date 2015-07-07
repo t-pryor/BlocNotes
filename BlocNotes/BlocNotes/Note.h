@@ -2,7 +2,7 @@
 //  Note.h
 //  BlocNotes
 //
-//  Created by Tim Pryor on 2015-06-17.
+//  Created by Tim Pryor on 2015-07-06.
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
@@ -13,9 +13,8 @@
 @interface Note : NSManagedObject
 
 @property (nonatomic, retain) NSString * body;
-@property (nonatomic) NSTimeInterval dateModified;
 @property (nonatomic) NSTimeInterval dateCreated;
-@property (nonatomic, retain) NSString * title;
+@property (nonatomic) NSTimeInterval dateModified;
 @property (nonatomic) BOOL recentlyUpdated;
 
 @end

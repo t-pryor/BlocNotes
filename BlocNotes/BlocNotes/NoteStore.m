@@ -120,10 +120,6 @@
 }
 
 
-# pragma mark - Getters
-
-
-
 - (Note *)createNote
 {
   Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
@@ -133,44 +129,42 @@
   return note;
 }
 
-
-
-- (Note *)createNoteWithTitle: (NSString *)title
-                      andBody: (NSString *)body
+- (Note *)createNoteWithBody:(NSString *)body
 {
-  Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                             inManagedObjectContext:self.context];
-
-  note.title = title;
-  note.body = body;
-  note.dateCreated = [NSDate timeIntervalSinceReferenceDate];
-  
-  [self.privateNotes addObject:note];
-  
-  return note;
+    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                               inManagedObjectContext:self.context];
+    note.body = body;
+    note.dateCreated = [NSDate timeIntervalSinceReferenceDate];
+    [self.privateNotes addObject:note];
+    
+    return note;
 }
 
-
-
-// should this be an NSArray? Is this unique?
-- (Note *)fetchNoteWithTitle: (NSString *)title
+- (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize predicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDescriptors
 {
-  
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-  NSEntityDescription *e = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
-  fetchRequest.entity = e;
-  
-  NSPredicate *p = [NSPredicate predicateWithFormat:@"title = %@", title];
-  [fetchRequest setPredicate:p];
-  
-  NSArray *result = [self.context executeFetchRequest:fetchRequest error:nil];
-  
-  return [result firstObject];
-  
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    
+    
+    [fetchRequest setFetchBatchSize:batchSize];
+    
+    // Specify criteria for filtering which objects to fetch
+    [fetchRequest setPredicate:predicate];
+    
+    // Specify how the fetched objects should be sorted
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        NSLog(@"Problem! %@", error);
+    }
+    
+    return fetchedObjects;
+
 }
-
-
-
 
 - (void)loadAllNotes
 {
@@ -180,18 +174,8 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" // entity = table
                                               inManagedObjectContext:self.context]; //database layer
     fetchRequest.entity = entity;
-    
-    // do we want to set a predicate, like only recent notes? from book;
-    // NSPredicate *p = [NSPredicate predicateWithFormat:@"valueInDollors > 50"];
-    // [request setPredicate:p]
-    //
-    
-   // NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"orderingValue"
-                                                         //ascending:YES];
-   // fetchRequest.sortDescriptors = @[sd];
-    
+  
     NSError *error;
-    
     NSArray *notes = [self.context executeFetchRequest:fetchRequest error:&error];
   
     if (!notes) {
@@ -203,6 +187,7 @@
   }
 }
 
+
 - (void)deleteNote:(Note *)note
 {
   [self.context deleteObject:note];
@@ -211,50 +196,25 @@
   
 }
 
-- (void) deleteNoteWithTitle: (NSString *) title
-{
-  
-    for (Note *note in self.privateNotes) {
-        if ([note.title isEqualToString:title]) {
-            [self.context deleteObject:note];
-            [self.privateNotes removeObjectIdenticalTo:note];
-            break; 
-        }
-    }
-    
-    
-    
-}
-
-- (Note *)editNoteWithTitle:(NSString *)title withNewBody:(NSString *)body
-{
-    
-    [self deleteNoteWithTitle:title];
-    
-    return [self createNoteWithTitle:title andBody:body];
-}
-
 
 - (NSFetchRequest *)createFetchRequest
 {
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
-  [fetchRequest setEntity:entity];
-  
-  // Set the batch size to a suitable number.
-  [fetchRequest setFetchBatchSize:20];
-  
-  // Edit the sort key as appropriate.
-  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
-  NSArray *sortDescriptors = @[sortDescriptor];
-  
-  [fetchRequest setSortDescriptors:sortDescriptors];
-  
-  return fetchRequest;
-  
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    return fetchRequest;
+    
 }
-
-
 
 
 

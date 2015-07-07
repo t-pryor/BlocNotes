@@ -24,22 +24,19 @@
 - (Note *)createNote;
 - (BOOL) saveChanges;
 - (void) deleteNote: (Note *)note;
-- (void) deleteNoteWithTitle: (NSString *) title;
 
 - (NSFetchRequest *)createFetchRequest;
 
-
 - (void)loadAllNotes;
 
+- (Note *)createNoteWithBody:(NSString *)body;
 
-- (Note *)createNoteWithTitle:(NSString *)title
-                      andBody:(NSString *)body;
+- (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize
+                                    predicate:(NSPredicate *)predicate
 
-- (Note *)fetchNoteWithTitle:(NSString *)title;
+                           andSortDescriptors:(NSArray *)sortDescriptors;
 
-- (Note *)editNoteWithTitle:(NSString *)title
-                   withNewBody:(NSString *)body;
-
+- (Note *)fetchNoteWithBody:(NSString *)body;
 
 
 
