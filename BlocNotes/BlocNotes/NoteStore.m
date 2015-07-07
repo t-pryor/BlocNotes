@@ -197,7 +197,13 @@
 }
 
 
-- (NSFetchRequest *)createFetchRequest
+//-----------------
+// @name
+//
+
+
+
+- (NSFetchRequest *)createInitialFetchRequest
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.context];
@@ -213,8 +219,29 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     return fetchRequest;
+}
+
+
+
+/**
+    Loads the privateNotes array with Notes from the original fetch.
+ 
+    The NSFetchController in MasterViewController calls this method after 
+    it calls performFetch. It passes in its fetchedObjects array.
+
+    @param notes The array of notes retrieved by Core Data during
+ 
+    @see MasterViewController:
+ */
+
+
+- (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes
+{
+    self.privateNotes = [[NSMutableArray alloc] initWithArray:notes];
     
 }
+
+
 
 
 

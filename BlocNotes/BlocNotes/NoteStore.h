@@ -25,7 +25,6 @@
 - (BOOL) saveChanges;
 - (void) deleteNote: (Note *)note;
 
-- (NSFetchRequest *)createFetchRequest;
 
 - (void)loadAllNotes;
 
@@ -36,8 +35,8 @@
 
                            andSortDescriptors:(NSArray *)sortDescriptors;
 
-- (Note *)fetchNoteWithBody:(NSString *)body;
+- (NSFetchRequest *)createInitialFetchRequest;
 
-
+- (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes;
 
 @end

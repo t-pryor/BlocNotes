@@ -130,7 +130,7 @@
         return _fetchedResultsController;
     }
   
-    NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createFetchRequest];
+    NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
                                     
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] context] sectionNameKeyPath:nil cacheName:@"Master"]; //11min
   
@@ -146,6 +146,8 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
 	}
+    
+    [[NoteStore sharedInstance] loadNotesFromInitialFetchIntoStore:[self.fetchedResultsController fetchedObjects]];
     
     
     return _fetchedResultsController;
