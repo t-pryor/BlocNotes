@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddNoteViewController.h"
 
-@interface DetailViewController : UIViewController
+
+@interface DetailViewController : UIViewController <AddNoteViewControllerDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

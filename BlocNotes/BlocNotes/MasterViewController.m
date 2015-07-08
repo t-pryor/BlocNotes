@@ -28,11 +28,11 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  //self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+  //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
  
-  self.navigationItem.rightBarButtonItem = addButton;
+ // self.navigationItem.rightBarButtonItem = addButton;
   self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -42,7 +42,8 @@
 }
 
 
-- (void)insertNewObject:(id)sender {
+/*
+ - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     
@@ -61,11 +62,14 @@
         abort();
     }
 }
+ 
+ */
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([[segue identifier] isEqualToString:@"showDetail"]) {
+  
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
       NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
       DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
@@ -73,6 +77,14 @@
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
       controller.navigationItem.leftItemsSupplementBackButton = YES;
   }
+    
+    if ([[segue identifier] isEqualToString:@"addNote"]) {
+        AddNoteViewController *anvc = (AddNoteViewController *)[segue destinationViewController];
+        anvc.delegate = self;
+        Note *newNote= (Note *) [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[[NoteStore sharedInstance] managedObjectContext]];
+        anvc.currentNote = newNote;
+    }
+    
 }
 
 
@@ -116,11 +128,9 @@
 }
 
 
- 
-//13-9minstanford
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  cell.textLabel.text = [[object valueForKey:@"dateCreated"] description];
+  cell.textLabel.text = [[object valueForKey:@"body"] description];
 }
 
 #pragma mark - Fetched results controller
@@ -223,5 +233,34 @@
     [self.tableView reloadData];
 }
 */
+
+
+#pragma mark - AddNoteViewController Delegate Methods
+
+- (void)addNoteViewControllerDidCancel:(Note *)noteToDelete
+{
+    
+    NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];
+    [context deleteObject:noteToDelete];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+}
+
+- (void)addNoteViewControllerDidSave
+{
+    NSError *error = nil;
+    NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];
+    if (![context save:&error]) {
+        NSLog(@"Error! %@", error);
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+
+
 
 @end

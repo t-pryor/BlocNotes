@@ -28,7 +28,7 @@
 - (void)configureView {
   // Update the user interface for the detail item.
   if (self.detailItem) {
-      self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"dateCreated"] description];
+      self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"body"] description];
   }
 }
 
@@ -42,5 +42,17 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - AddNoteViewController delegate
+- (void)addNoteViewControllerDidSave
+{
+    
+}
+
+- (void)addNoteViewControllerDidCancel:(Note *)noteToDelete
+{
+    
+}
+
 
 @end

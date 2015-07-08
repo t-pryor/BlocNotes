@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		223581411B4C5A6A0096646D /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 223581401B4C5A6A0096646D /* Note.m */; };
+		223581441B4C655D0096646D /* AddNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223581431B4C655D0096646D /* AddNoteViewController.m */; };
+		223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 223581451B4D8E360096646D /* AddNoteViewControllerTests.m */; };
 		223AD2F11B2F2C20003965FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F01B2F2C20003965FA /* main.m */; };
 		223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F31B2F2C20003965FA /* AppDelegate.m */; };
 		223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */; };
@@ -16,7 +18,6 @@
 		223AD3001B2F2C20003965FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223AD2FE1B2F2C20003965FA /* Main.storyboard */; };
 		223AD3021B2F2C20003965FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3011B2F2C20003965FA /* Images.xcassets */; };
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
-		223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD3101B2F2C20003965FA /* BlocNotesTests.m */; };
 		22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
@@ -35,6 +36,9 @@
 /* Begin PBXFileReference section */
 		2235813F1B4C5A6A0096646D /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		223581401B4C5A6A0096646D /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		223581421B4C655D0096646D /* AddNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNoteViewController.h; sourceTree = "<group>"; };
+		223581431B4C655D0096646D /* AddNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNoteViewController.m; sourceTree = "<group>"; };
+		223581451B4D8E360096646D /* AddNoteViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNoteViewControllerTests.m; sourceTree = "<group>"; };
 		223AD2EB1B2F2C20003965FA /* BlocNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD2EF1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223AD2F01B2F2C20003965FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -50,7 +54,6 @@
 		223AD3041B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		223AD30A1B2F2C20003965FA /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		223AD3101B2F2C20003965FA /* BlocNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocNotesTests.m; sourceTree = "<group>"; };
 		22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewControllerTests.m; sourceTree = "<group>"; };
 		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
 		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				223AD2F91B2F2C20003965FA /* MasterViewController.m */,
 				223AD2FB1B2F2C20003965FA /* DetailViewController.h */,
 				223AD2FC1B2F2C20003965FA /* DetailViewController.m */,
+				223581421B4C655D0096646D /* AddNoteViewController.h */,
+				223581431B4C655D0096646D /* AddNoteViewController.m */,
 				223AD2FE1B2F2C20003965FA /* Main.storyboard */,
 				223AD3011B2F2C20003965FA /* Images.xcassets */,
 				223AD3031B2F2C20003965FA /* LaunchScreen.xib */,
@@ -125,7 +130,6 @@
 			children = (
 				22BB9FCE1B3ABA810013E5FA /* Controller Tests */,
 				22E526051B31F343005F3421 /* Model Tests */,
-				223AD3101B2F2C20003965FA /* BlocNotesTests.m */,
 				223AD30E1B2F2C20003965FA /* Supporting Files */,
 			);
 			path = BlocNotesTests;
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */,
+				223581451B4D8E360096646D /* AddNoteViewControllerTests.m */,
 			);
 			name = "Controller Tests";
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				223581441B4C655D0096646D /* AddNoteViewController.m in Sources */,
 				223AD2FD1B2F2C20003965FA /* DetailViewController.m in Sources */,
 				22E5260A1B331693005F3421 /* NoteStore.m in Sources */,
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,
@@ -283,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */,
-				223AD3111B2F2C20003965FA /* BlocNotesTests.m in Sources */,
+				223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

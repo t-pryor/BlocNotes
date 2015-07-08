@@ -8,33 +8,56 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "AddNoteViewController.h"
+#import <objc/message.h>
+
 
 @interface AddNoteViewControllerTests : XCTestCase
+
 
 @end
 
 @implementation AddNoteViewControllerTests
 
+{
+    AddNoteViewController *anvc;
+}
+
+
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    anvc = [[AddNoteViewController alloc]init];
+    
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    anvc = nil;
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testViewControllerHasADelegateProperty
+{
+    objc_property_t delegateProperty = class_getProperty([anvc class], "delegate");
+    XCTAssertTrue(delegateProperty != NULL, @"AddNoteViewController needs a delegate");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testViewControllerHasANoteProperty
+{
+    objc_property_t noteProperty = class_getProperty([anvc class], "currentNote");
+    XCTAssertTrue(noteProperty != nil, @"AddNoteViewController needs a note object");
 }
+
+//- (void)testViewControllerSetsDelegate
+//{
+//    XCTAssertTrue(anvc.delegate != nil);
+//    
+//}
+
+
+
+
 
 @end
