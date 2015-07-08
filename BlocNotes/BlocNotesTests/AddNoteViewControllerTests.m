@@ -1,19 +1,19 @@
 //
-//  BlocNotesTests.m
-//  BlocNotesTests
+//  AddNoteViewControllerTests.m
+//  BlocNotes
 //
-//  Created by Tim Pryor on 2015-06-15.
+//  Created by Tim Pryor on 2015-07-08.
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface BlocNotesTests : XCTestCase
+@interface AddNoteViewControllerTests : XCTestCase
 
 @end
 
-@implementation BlocNotesTests
+@implementation AddNoteViewControllerTests
 
 - (void)setUp {
     [super setUp];
