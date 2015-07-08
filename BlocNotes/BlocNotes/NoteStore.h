@@ -26,8 +26,6 @@
 - (void) deleteNote: (Note *)note;
 
 
-- (void)loadAllNotes;
-
 - (Note *)createNoteWithBody:(NSString *)body;
 
 - (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize

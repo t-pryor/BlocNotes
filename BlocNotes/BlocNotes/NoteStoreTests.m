@@ -145,13 +145,6 @@
 
 }
 
-- (void)testLoadInitialNotes
-{
-    NSArray *testNotes = [[NoteStore sharedInstance] allNotes];
-    
-   // [[NoteStore sharedInstance] loadInitialNotes:testNotes];
-    
-}
 
 
 

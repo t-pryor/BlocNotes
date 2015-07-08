@@ -25,9 +25,9 @@
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
     
-    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+   // UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
     
-    MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
+    // MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
     
     // Initialize our Note Store
     [NoteStore sharedInstance];

@@ -131,7 +131,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4P3-ru-y19">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4P3-ru-y19">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="New Note" id="Nwb-Sn-Hjj">
@@ -148,14 +148,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write your note ..." translatesAutoresizingMaskIntoConstraints="NO" id="yuO-ug-fBg">
-                                <rect key="frame" x="16" y="75" width="568" height="505"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuO-ug-fBg">
+                                <rect key="frame" x="20" y="64" width="560" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4P3-ru-y19" firstAttribute="top" secondItem="iUx-F0-phR" secondAttribute="bottom" symbolic="YES" id="0O4-Ru-rIp"/>
+                            <constraint firstItem="yuO-ug-fBg" firstAttribute="leading" secondItem="26t-uE-5lJ" secondAttribute="leading" constant="20" symbolic="YES" id="95M-1s-3EX"/>
+                            <constraint firstAttribute="trailing" secondItem="yuO-ug-fBg" secondAttribute="trailing" constant="20" symbolic="YES" id="C6j-BM-Ycq"/>
+                            <constraint firstItem="LxP-TW-Q71" firstAttribute="top" secondItem="yuO-ug-fBg" secondAttribute="bottom" constant="8" symbolic="YES" id="DGt-jq-EgT"/>
+                            <constraint firstAttribute="trailing" secondItem="4P3-ru-y19" secondAttribute="trailing" symbolic="YES" id="Srm-M5-1q9"/>
+                            <constraint firstItem="yuO-ug-fBg" firstAttribute="top" secondItem="4P3-ru-y19" secondAttribute="bottom" symbolic="YES" id="Twz-sA-bHm"/>
+                            <constraint firstItem="yuO-ug-fBg" firstAttribute="top" secondItem="4P3-ru-y19" secondAttribute="bottom" id="vOK-wQ-UyV"/>
+                            <constraint firstItem="4P3-ru-y19" firstAttribute="leading" secondItem="26t-uE-5lJ" secondAttribute="leading" symbolic="YES" id="w5Y-my-r30"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="textView" destination="yuO-ug-fBg" id="PIV-ny-Cr1"/>

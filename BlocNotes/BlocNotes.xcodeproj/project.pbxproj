@@ -18,7 +18,6 @@
 		223AD3001B2F2C20003965FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223AD2FE1B2F2C20003965FA /* Main.storyboard */; };
 		223AD3021B2F2C20003965FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3011B2F2C20003965FA /* Images.xcassets */; };
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
-		22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
 /* End PBXBuildFile section */
@@ -54,7 +53,6 @@
 		223AD3041B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		223AD30A1B2F2C20003965FA /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewControllerTests.m; sourceTree = "<group>"; };
 		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
 		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
 		22E5260B1B334D7B005F3421 /* NoteStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStoreTests.m; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		22BB9FCE1B3ABA810013E5FA /* Controller Tests */ = {
 			isa = PBXGroup;
 			children = (
-				22BB9FCF1B3ABAB40013E5FA /* MasterViewControllerTests.m */,
 				223581451B4D8E360096646D /* AddNoteViewControllerTests.m */,
 			);
 			name = "Controller Tests";
@@ -288,7 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BB9FD01B3ABAB40013E5FA /* MasterViewControllerTests.m in Sources */,
 				223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
 			);
