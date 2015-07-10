@@ -18,6 +18,7 @@
 		223AD3001B2F2C20003965FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223AD2FE1B2F2C20003965FA /* Main.storyboard */; };
 		223AD3021B2F2C20003965FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3011B2F2C20003965FA /* Images.xcassets */; };
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
+		22D4BFAC1B4EAC49007D4E03 /* DetailViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D4BFAB1B4EAC49007D4E03 /* DetailViewControllerTests.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
 /* End PBXBuildFile section */
@@ -46,13 +47,14 @@
 		223AD2F61B2F2C20003965FA /* BlocNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BlocNotes.xcdatamodel; sourceTree = "<group>"; };
 		223AD2F81B2F2C20003965FA /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		223AD2F91B2F2C20003965FA /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		223AD2FB1B2F2C20003965FA /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		223AD2FB1B2F2C20003965FA /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		223AD2FC1B2F2C20003965FA /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		223AD2FF1B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		223AD3011B2F2C20003965FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		223AD3041B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		223AD30A1B2F2C20003965FA /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22D4BFAB1B4EAC49007D4E03 /* DetailViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewControllerTests.m; sourceTree = "<group>"; };
 		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
 		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
 		22E5260B1B334D7B005F3421 /* NoteStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStoreTests.m; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				223581451B4D8E360096646D /* AddNoteViewControllerTests.m */,
+				22D4BFAB1B4EAC49007D4E03 /* DetailViewControllerTests.m */,
 			);
 			name = "Controller Tests";
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			files = (
 				223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
+				22D4BFAC1B4EAC49007D4E03 /* DetailViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -70,12 +70,29 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-      DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        
+        UINavigationController *nav = [segue destinationViewController];
+        DetailViewController *dvc = (DetailViewController *)nav.topViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
+        dvc.currentNote = currentNote;
+        
+//        dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+//
+//        dvc.navigationItem.leftItemsSupplementBackButton = NO;
+        
+   
+    
+        
+    /*
+        
+    NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+      
+        
+    DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
       [controller setDetailItem:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-      controller.navigationItem.leftItemsSupplementBackButton = YES;
+      controller.navigationItem.leftItemsSupplementBackButton = YES;*/
   }
     
     if ([[segue identifier] isEqualToString:@"addNote"]) {

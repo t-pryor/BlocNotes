@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "AddNoteViewController.h"
+#import "Note.h"
 
-
-@interface DetailViewController : UIViewController <AddNoteViewControllerDelegate>
+@interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
+
+@property (nonatomic, weak) Note *currentNote;
+
+- (void)saveEdits;
+
+
 
 @end
 

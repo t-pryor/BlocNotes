@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "AddNoteViewController.h"
 #import <objc/message.h>
+#import "NoteStore.h"
 
 
 @interface AddNoteViewControllerTests : XCTestCase
@@ -20,7 +21,11 @@
 @implementation AddNoteViewControllerTests
 
 {
+    Note *n;
     AddNoteViewController *anvc;
+    id sender;
+    UITextView *tv;
+    
 }
 
 
@@ -29,7 +34,9 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
     anvc = [[AddNoteViewController alloc]init];
-    
+    n = (Note *) [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[[NoteStore sharedInstance] managedObjectContext]];
+    sender = [[UIBarButtonItem alloc]init];
+    tv = [[UITextView alloc] init];
 }
 
 - (void)tearDown {
@@ -49,6 +56,31 @@
     objc_property_t noteProperty = class_getProperty([anvc class], "currentNote");
     XCTAssertTrue(noteProperty != nil, @"AddNoteViewController needs a note object");
 }
+
+- (void)testThatAddNoteViewControllerBodyFieldNeverEmpty
+{
+    
+    tv.text = @"";
+    
+    anvc.textView = tv;
+    anvc.currentNote = n;
+    
+    [anvc savePressed:sender];
+    XCTAssertTrue(anvc.currentNote.body.length > 0);
+}
+
+- (void)testThatCancelPressedPerformsNoChanges
+{
+    anvc.textView = tv;
+    anvc.currentNote = n;
+    [anvc cancelPressed:sender];
+    
+    
+    
+    
+}
+
+
 
 //- (void)testViewControllerSetsDelegate
 //{

@@ -32,8 +32,14 @@
 
 - (IBAction)savePressed:(id)sender
 {
+    if ([self.textView.text isEqualToString:@""]) {
+        self.textView.textColor = [UIColor grayColor];
+        self.textView.text = @"Tap to edit";
+    }
+    
     [self.currentNote setBody:self.textView.text];
     [self.delegate addNoteViewControllerDidSave];
+
 }
 
 @end
