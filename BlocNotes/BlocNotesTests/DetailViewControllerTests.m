@@ -72,14 +72,17 @@
     XCTAssertEqualObjects(n.body, @"Body after edit");
 }
 
-- (void)testThatDetailViewControllerAlwaysDisplaysTextEvenWithEmptyNote
+- (void)testThatOnlyDVCsWithAssociatedNotesSaveEdits
 {
+    dvc.currentNote = nil;
+    
+    [dvc saveEdits];
+    
+    
+    
     
 }
 
-- (void)testThatDetailViewControllerNoteCanBeEditedAndSaved
-{
-    
-}
+
 
 @end

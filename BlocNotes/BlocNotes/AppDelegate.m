@@ -21,18 +21,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    UINavigationController *navigationControllerForDetailVC = [splitViewController.viewControllers lastObject];
+    navigationControllerForDetailVC.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
-    
-   // UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    
-    // MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
+    // Like Evernote, keep Master visible in iPad portrait mode
+    splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     
     // Initialize our Note Store
     [NoteStore sharedInstance];
-    
-    //controller.managedObjectContext = self.managedObjectContext;
     
     return YES;
 }
@@ -76,6 +72,8 @@
         return NO;
     }
 }
+
+
 
 
 

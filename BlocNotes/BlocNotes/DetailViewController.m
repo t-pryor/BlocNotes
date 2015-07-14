@@ -22,12 +22,17 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.detailTextView.text = self.currentNote.body;
-    
+   
+    // like Evernote, if user did not enter text during
+    // initial note creation, show placeholder text in light gray
+    if ([self.detailTextView.text isEqualToString:@"Tap to edit"]) {
+        self.detailTextView.textColor = [UIColor lightGrayColor];
+    }
 }
 
 - (void)saveEdits
 {
-    if (self.currentNote.body != self.detailTextView.text) {
+    if (![self.currentNote.body isEqualToString:self.detailTextView.text]) {
         self.currentNote.body = self.detailTextView.text;
     
         NSError *error = nil;
@@ -41,9 +46,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self saveEdits];
+    // only commit edits if currentNote exists
+    // currentNote won't exist after deleting note in master
+    if (self.currentNote) [self saveEdits];
 }
-
 
 
 - (void)didReceiveMemoryWarning {

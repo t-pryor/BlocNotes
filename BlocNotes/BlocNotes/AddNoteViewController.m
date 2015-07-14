@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,7 +34,7 @@
 - (IBAction)savePressed:(id)sender
 {
     if ([self.textView.text isEqualToString:@""]) {
-        self.textView.textColor = [UIColor grayColor];
+        self.textView.textColor = [UIColor blueColor];
         self.textView.text = @"Tap to edit";
     }
     

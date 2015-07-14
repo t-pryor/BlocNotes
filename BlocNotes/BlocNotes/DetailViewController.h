@@ -12,10 +12,15 @@
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
 
+@property (strong, nonatomic) id detailItem;
+
+
+@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
 @property (nonatomic, weak) Note *currentNote;
+
+
+
 
 - (void)saveEdits;
 

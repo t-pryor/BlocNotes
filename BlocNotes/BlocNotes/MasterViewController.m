@@ -17,53 +17,26 @@
 
 @implementation MasterViewController
 
-- (void)awakeFromNib {
-  [super awakeFromNib];
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-      self.clearsSelectionOnViewWillAppear = NO;
-      self.preferredContentSize = CGSizeMake(320.0, 600.0);
-  }
-}
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
-  //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-  //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
- 
- // self.navigationItem.rightBarButtonItem = addButton;
-  self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-
-/*
- - (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    
-    Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    note.dateCreated = [NSDate date];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.clearsSelectionOnViewWillAppear = NO;
+        self.preferredContentSize = CGSizeMake(320.0, 600.0);
     }
 }
- 
- */
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 #pragma mark - Segues
 
@@ -74,25 +47,11 @@
         UINavigationController *nav = [segue destinationViewController];
         DetailViewController *dvc = (DetailViewController *)nav.topViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+   
         Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
         dvc.currentNote = currentNote;
-        
-//        dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-//
-//        dvc.navigationItem.leftItemsSupplementBackButton = NO;
-        
-   
-    
-        
-    /*
-        
-    NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-      
-        
-    DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-      [controller setDetailItem:object];
-      controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-      controller.navigationItem.leftItemsSupplementBackButton = YES;*/
+        dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        dvc.navigationItem.leftItemsSupplementBackButton = YES;
   }
     
     if ([[segue identifier] isEqualToString:@"addNote"]) {
@@ -108,46 +67,72 @@
 #pragma mark - Table View
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return [[self.fetchedResultsController sections] count];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-  return [sectionInfo numberOfObjects];
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-  [self configureCell:cell atIndexPath:indexPath];
-  return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  // Return NO if you do not want the specified item to be editable.
-  return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (editingStyle == UITableViewCellEditingStyleDelete) {
-      NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-      [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-          
-      NSError *error = nil;
-      if (![context save:&error]) {
-          // Replace this implementation with code to handle the error appropriately.
-          // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-          NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-          abort();
-      }
-  }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-  NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  cell.textLabel.text = [[object valueForKey:@"body"] description];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        // replace deleted object's text with placeholder text
+        
+        UINavigationController *nav = [[self.splitViewController viewControllers] lastObject];
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            DetailViewController *dvc = (DetailViewController *)[[nav viewControllers] firstObject];
+            
+            if ([self.tableView numberOfRowsInSection:0] > 1) {
+                dvc.detailTextView.text = @"Select a note";
+            } else {
+                dvc.detailTextView.text = @"Please add a new note";
+            }
+            // delete current note
+            dvc.currentNote = nil;
+        }
+        
+        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        
+
+    }
+}
+
+
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"body"] description];
 }
 
 #pragma mark - Fetched results controller
@@ -161,7 +146,7 @@
   
     NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
                                     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Master"]; //11min
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Master"];
   
     aFetchedResultsController.delegate = self;
   
@@ -242,21 +227,11 @@
     [self.tableView endUpdates];
 }
 
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
-/*
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
-*/
-
 
 #pragma mark - AddNoteViewController Delegate Methods
 
 - (void)addNoteViewControllerDidCancel:(Note *)noteToDelete
 {
-    
     NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];
     [context deleteObject:noteToDelete];
     
@@ -276,8 +251,5 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
-
-
-
 
 @end
