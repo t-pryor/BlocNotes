@@ -13,17 +13,43 @@
 
 @interface AddNoteViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-
-@property (nonatomic, weak) id <AddNoteViewControllerDelegate> delegate;
+/**
+ Represents the new note being created.
+ Once user fills in note info, this information will be passed to the currentNote's body property
+ */
 @property (nonatomic, weak) Note *currentNote;
 
+
+/**
+ This stores the text being entered by the user.
+ This info passed to currentNote.body when save is entered.
+ */
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+
+/**
+ The Master VC is the delegate and performs a model segue when the user wants to create a new note.
+ */
+@property (nonatomic, weak) id <AddNoteViewControllerDelegate> delegate;
+
+
+/**
+ This calls the delegate's addNoteViewControllerDidCancel: method when the cancel button is pressed
+ */
 - (IBAction)cancelPressed:(id)sender;
+
+
+/**
+ This calls the delegate's addNoteViewControllerDidSave: method when the save button is pressed
+ */
 - (IBAction)savePressed:(id)sender;
 
 @end
 
 
+/**
+ This protocol is instituted by the Master VC to handle when the user presses save and cance.
+ */
 @protocol AddNoteViewControllerDelegate
 
 - (void)addNoteViewControllerDidSave;

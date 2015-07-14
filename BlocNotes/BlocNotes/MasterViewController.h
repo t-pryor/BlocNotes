@@ -16,6 +16,14 @@
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
+
+
+/**
+ Manages communication between the Note Store and the table view.
+ Moved fetch initialization information to the Note Store.
+ This is accessed through the Note Store singleton createInitialFetchRequest method.
+ The managed object context was also moved to the NoteStore and this is accessed through its getter method.
+ */
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 
