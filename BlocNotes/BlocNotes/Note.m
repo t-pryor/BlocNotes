@@ -2,7 +2,7 @@
 //  Note.m
 //  BlocNotes
 //
-//  Created by Tim Pryor on 2015-07-07.
+//  Created by Tim Pryor on 2015-07-16.
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
@@ -13,7 +13,6 @@
 
 @dynamic body;
 @dynamic dateCreated;
-@dynamic dateModified;
-@dynamic recentlyUpdated;
+@dynamic title;
 
 @end

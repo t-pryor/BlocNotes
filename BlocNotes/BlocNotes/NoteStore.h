@@ -37,4 +37,7 @@
 
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes;
 
+- (Note *)createNoteWithTitle:(NSString *)title;
+
+
 @end

@@ -16,9 +16,28 @@
 
 @implementation NoteStoreTests
 
+{
+    
+    Note *testNote1;
+    Note *testNote2;
+    
+    NoteStore *testStore1;
+    NoteStore *testStore2;
+    NoteStore *testStore3;
+    
+}
+
+
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    testNote1 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote1 title"];
+    testNote2 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote2 title"];
+    
+    testStore1 = [[NoteStore alloc]init];
+    testStore2 = [NoteStore sharedInstance];
+    testStore3 = [NoteStore sharedInstance];
+    
 
   
 }
@@ -27,6 +46,9 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
+    [[NoteStore sharedInstance] deleteNote:testNote1];
+    [[NoteStore sharedInstance] deleteNote:testNote2];
+    
 }
 
 
@@ -34,8 +56,7 @@
 
 - (void)testInitReturnsNil
 {
-  NoteStore *testStore = [[NoteStore alloc] init];
-  XCTAssertNil(testStore);
+    XCTAssertNil(testStore1);
 }
 
 
@@ -43,66 +64,61 @@
 
 - (void)testNoteStoreSharedInstanceReturnsNoteStoreSingleton
 {
-  NoteStore *testStore = [NoteStore sharedInstance];
-  NoteStore *testStore2 = [NoteStore sharedInstance];
-  
-  XCTAssertEqualObjects(testStore, testStore2);
-  
+    XCTAssertEqualObjects(testStore2, testStore3);
 }
 
 - (void)testThatCreateNoteSuccessfullyCreatesNote
 {
-  Note *testNote = [[NoteStore sharedInstance] createNote];
-  
-  XCTAssertEqualObjects([testNote class], [Note class]);
-  
+    testNote1 = [[NoteStore sharedInstance] createNote];
+    
+    XCTAssertEqualObjects([testNote1 class], [Note class]);
 }
 
 - (void)testThatCreateNoteWithBodyCreatesNote
 {
+    testNote1 = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note"];
     
-    Note *testNote = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note"];
-    
-    XCTAssertEqualObjects(testNote.body , @"This is the body of a test note");
+    XCTAssertEqualObjects(testNote1.body , @"This is the body of a test note");
 }
+
+- (void)testCreateNoteWithTitleCreatesNote
+{
+    XCTAssertEqualObjects(testNote1.title, @"testNote1 title");
+}
+
 
 - (void)testFetch
 {
-    Note *testNote = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testFetch method"];
-    
-    //testNote2 identical except for another
-    Note *testNote2 = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testFetch method"];
-    
-    
+ 
     NSArray *fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:nil andSortDescriptors:nil];
     
     NSLog(@"fetched notes: %@", fetchedNotes);
     
-    NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"body == 'This is the body of a test note in the testFetch method'"];
+    NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"title == 'testNote1 title'"];
     
     fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:nil];
     
-    XCTAssertEqualObjects([[fetchedNotes firstObject] body], testNote.body);
+    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote1.title);
 
     
     NSSortDescriptor *testSort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
     
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:testSort,nil];
     
-    testPredicate = [NSPredicate predicateWithFormat:@"body LIKE '*testFetch*'"];
+    testPredicate = [NSPredicate predicateWithFormat:@"title LIKE '*title*'"];
     
     
     fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
     
-    XCTAssertEqualObjects([[fetchedNotes firstObject] body], testNote2.body);
+    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote2.title);
     
-    testPredicate = [NSPredicate predicateWithFormat:@"body CONTAINS 'another'"];
+    testPredicate = [NSPredicate predicateWithFormat:@"title CONTAINS 'testNote2'"];
     
     fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
     
-    XCTAssertEqualObjects([[fetchedNotes firstObject] body], testNote2.body);
+    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote2.title);
     
-    testPredicate = [NSPredicate predicateWithFormat:@"body CONTAINS 'anotherzzz'"];
+    testPredicate = [NSPredicate predicateWithFormat:@"body CONTAINS 'foo'"];
     
     fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
 
@@ -112,9 +128,11 @@
 
 - (void)testAllNotesGetter
 {
-   Note *testNote = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testAllNotesGetter method"];
+    Note *testNote3 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote3 title"];
     
-    XCTAssertEqualObjects(testNote, [[[NoteStore sharedInstance] allNotes] lastObject]);
+    XCTAssertEqualObjects(testNote3, [[[NoteStore sharedInstance] allNotes] lastObject]);
+    
+    [[NoteStore sharedInstance] deleteNote:testNote3];
 }
 
 
@@ -124,72 +142,31 @@
 
     [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testDeleteNote method"];
     
-    //testNote2 identical except for another
     [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testAllNotes method"];
     
     int countAfterCreation = [[[NoteStore sharedInstance] allNotes]count];
     
-    Note *testNote1 = [[[NoteStore sharedInstance]allNotes]lastObject];
-    Note *testNote2 = [[[NoteStore sharedInstance]allNotes]lastObject];
+    Note *testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
+    Note *testNoteB = [[[NoteStore sharedInstance]allNotes]lastObject];
     
-    XCTAssertEqualObjects(testNote1, testNote2);
+    XCTAssertEqualObjects(testNoteA, testNoteB);
     
-    [[NoteStore sharedInstance] deleteNote:testNote1];
+    [[NoteStore sharedInstance] deleteNote:testNoteA];
     
     int countAfterDeletion = [[[NoteStore sharedInstance] allNotes]count];
     
-    testNote1 = [[[NoteStore sharedInstance]allNotes]lastObject];
+    testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
     
-    XCTAssertNotEqualObjects(testNote1, testNote2);
+    XCTAssertNotEqualObjects(testNoteA, testNoteB);
     XCTAssertEqual(countAfterDeletion, countAfterCreation - 1);
+    
+    [[NoteStore sharedInstance] deleteNote:testNoteB];
 
 }
 
 
 
 
-
-
-
-//
-
-//
-//- (void)testSaveChanges
-//{
-// 
-//  [[NoteStore sharedInstance] createNote];
-//  [[NoteStore sharedInstance] createNote];
-//  [[NoteStore sharedInstance] createNote];
-//  
-//  BOOL successful = [[NoteStore sharedInstance] saveChanges];
-//  
-//  XCTAssertEqual(successful, YES);
-//  
-//}
-//
-//
-//
-//- (void)testLoadAllNotes
-//{
-//  
-//  [[NoteStore sharedInstance] loadAllNotes];
-//  
-//  
-//  [[NoteStore sharedInstance] createNote];
-//  [[NoteStore sharedInstance] createNote];
-//  [[NoteStore sharedInstance] createNote];
-//  
-//  BOOL successful = [[NoteStore sharedInstance] saveChanges];
-//  
-//  XCTAssertEqual(successful, YES);
-//  
-//  [[NoteStore sharedInstance]loadAllNotes];
-//  
-//  //XCTAssertEqual([[[NoteStore sharedInstance] allNotes] count], 3);
-//  
-//  
-//}
-//
 
 
 

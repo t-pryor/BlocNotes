@@ -50,36 +50,7 @@
 - (instancetype)initPrivate
 {
   self = [super init];
-  if (self) {
-//    // Read in xcdatamodeld
-//    self.managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-//    
-//    NSLog(@"******* NSEntityDescription: %@", [self.managedObjectModel entities] );
-//    
-//    NSPersistentStoreCoordinator *psc =
-//    [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-//    
-//    // Where does the SQLite file go?
-//    NSString *path = [self notePath];
-//    NSURL *storeURL = [NSURL fileURLWithPath:path];
-//    
-//    NSError *error;
-//    
-//    if (![psc addPersistentStoreWithType:NSSQLiteStoreType
-//                           configuration:nil
-//                                     URL:storeURL
-//                                 options:nil
-//                                   error:&error]) {
-//      
-//      [NSException raise:@"Open Failurez"
-//                  format:@"%@",[error localizedDescription]];
-//    }
-//    
-//    // Create the managed object context
-//    //_managedObjectContext = [[NSManagedObjectContext alloc]init];
-//    self.managedObjectContext.persistentStoreCoordinator = psc;
-   // NSLog(@" ");
-  }
+  
   return self;
 }
 
@@ -116,8 +87,9 @@
 
 - (Note *)createNote
 {
-    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                               inManagedObjectContext:self.managedObjectContext];
+    Note *note = [NSEntityDescription
+                  insertNewObjectForEntityForName:@"Note"
+                  inManagedObjectContext:self.managedObjectContext];
     
     [self.privateNotes addObject:note];
     return note;
@@ -125,9 +97,23 @@
 
 - (Note *)createNoteWithBody:(NSString *)body
 {
-    Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                               inManagedObjectContext:self.managedObjectContext];
+    Note *note = (Note *)[NSEntityDescription
+                          insertNewObjectForEntityForName:@"Note"
+                          inManagedObjectContext:self.managedObjectContext];
     note.body = body;
+    note.dateCreated = [NSDate date];
+    [self.privateNotes addObject:note];
+    
+    return note;
+}
+
+-(Note *)createNoteWithTitle:(NSString *)title
+{
+    Note *note = (Note *)[NSEntityDescription
+                          insertNewObjectForEntityForName:@"Note"
+                          inManagedObjectContext:self.managedObjectContext];
+    
+    note.title = title;
     note.dateCreated = [NSDate date];
     [self.privateNotes addObject:note];
     
@@ -163,7 +149,7 @@
 - (void)deleteNote:(Note *)note
 {
     [self.managedObjectContext deleteObject:note];
-    [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
+    [self.privateNotes removeObjectIdenticalTo:note];
     note = nil;
   
 }
