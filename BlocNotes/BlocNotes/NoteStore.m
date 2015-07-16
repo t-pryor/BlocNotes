@@ -116,11 +116,11 @@
 
 - (Note *)createNote
 {
-  Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                             inManagedObjectContext:self.managedObjectContext];
-  
-  [self.privateNotes addObject:note];
-  return note;
+    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                               inManagedObjectContext:self.managedObjectContext];
+    
+    [self.privateNotes addObject:note];
+    return note;
 }
 
 - (Note *)createNoteWithBody:(NSString *)body
@@ -162,9 +162,9 @@
 
 - (void)deleteNote:(Note *)note
 {
-  [self.managedObjectContext deleteObject:note];
-  [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
-  note = nil;
+    [self.managedObjectContext deleteObject:note];
+    [self.privateNotes removeObjectIdenticalTo:note]; //look in objcbook
+    note = nil;
   
 }
 
@@ -178,7 +178,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];

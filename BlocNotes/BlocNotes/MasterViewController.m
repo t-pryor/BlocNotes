@@ -57,7 +57,8 @@
     if ([[segue identifier] isEqualToString:@"addNote"]) {
         AddNoteViewController *anvc = (AddNoteViewController *)[segue destinationViewController];
         anvc.delegate = self;
-        Note *newNote= (Note *) [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[[NoteStore sharedInstance] managedObjectContext]];
+
+        Note *newNote = [[NoteStore sharedInstance] createNoteWithBody:@""];
         anvc.currentNote = newNote;
     }
     
@@ -128,11 +129,10 @@
 }
 
 
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"body"] description];
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = note.body;
 }
 
 #pragma mark - Fetched results controller
@@ -146,7 +146,7 @@
   
     NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
                                     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
   
     aFetchedResultsController.delegate = self;
   
@@ -225,6 +225,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+    [self.tableView reloadData];
 }
 
 

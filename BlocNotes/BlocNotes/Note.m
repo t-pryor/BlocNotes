@@ -16,11 +16,4 @@
 @dynamic dateModified;
 @dynamic recentlyUpdated;
 
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    self.body = @"Tap to Edit";
-}
-
-
 @end
