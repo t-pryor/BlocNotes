@@ -32,9 +32,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap to edit" translatesAutoresizingMaskIntoConstraints="NO" id="9BG-Yh-3Lu">
-                                <rect key="frame" x="20" y="72" width="560" height="520"/>
+                                <rect key="frame" x="20" y="127" width="560" height="465"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8A-0R-SIs" userLabel="Title Text">
+                                <rect key="frame" x="20" y="79" width="560" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Rz0-V3-Cyf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -42,14 +51,19 @@
                         <constraints>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="9BG-Yh-3Lu" secondAttribute="bottom" constant="8" symbolic="YES" id="1Rh-DG-mrd"/>
                             <constraint firstAttribute="trailing" secondItem="9BG-Yh-3Lu" secondAttribute="trailing" constant="20" symbolic="YES" id="8qv-cO-uSi"/>
-                            <constraint firstItem="9BG-Yh-3Lu" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="8" symbolic="YES" id="D5e-TZ-Hq0"/>
+                            <constraint firstAttribute="trailing" secondItem="F8A-0R-SIs" secondAttribute="trailing" constant="20" symbolic="YES" id="BnE-P0-2cV"/>
+                            <constraint firstItem="F8A-0R-SIs" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="15" id="ESx-vh-F2h"/>
+                            <constraint firstItem="9BG-Yh-3Lu" firstAttribute="top" secondItem="F8A-0R-SIs" secondAttribute="bottom" constant="8" symbolic="YES" id="K2F-K1-PEz"/>
                             <constraint firstItem="9BG-Yh-3Lu" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="TJU-rW-5eB"/>
+                            <constraint firstItem="9BG-Yh-3Lu" firstAttribute="width" secondItem="F8A-0R-SIs" secondAttribute="width" id="yJR-yV-1Xp"/>
+                            <constraint firstItem="F8A-0R-SIs" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="ynm-hq-V1M"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mOI-FS-AaM"/>
                     <connections>
-                        <outlet property="detailTextView" destination="9BG-Yh-3Lu" id="GLe-gM-5m5"/>
+                        <outlet property="detailBodyTextView" destination="9BG-Yh-3Lu" id="1nW-zf-d7w"/>
+                        <outlet property="detailTitleTextView" destination="F8A-0R-SIs" id="zIK-X1-Bf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>

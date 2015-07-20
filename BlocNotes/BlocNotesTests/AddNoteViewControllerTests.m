@@ -76,21 +76,13 @@
     anvc.currentNote = n;
     [anvc cancelPressed:sender];
     
-    
-}
-
-- (void)testThatFontsAreSetupCorrectly
-{
-    
 }
 
 
 
-//- (void)testViewControllerSetsDelegate
-//{
-//    XCTAssertTrue(anvc.delegate != nil);
-//    
-//}
+
+
+
 
 
 

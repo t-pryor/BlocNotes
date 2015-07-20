@@ -25,11 +25,16 @@
 @property (nonatomic, weak) Note *currentNote;
 
 
+@property (weak, nonatomic) IBOutlet UITextView *detailTitleTextView;
+
+
+
 /**
  The UITextView used to store note information
  The Detail VC's associated Note's body property supplies this information
  */
-@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
+//@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
+@property (weak, nonatomic) IBOutlet UITextView *detailBodyTextView;
 
 
 /**

@@ -105,9 +105,9 @@
             DetailViewController *dvc = (DetailViewController *)[[nav viewControllers] firstObject];
             
             if ([self.tableView numberOfRowsInSection:0] > 1) {
-                dvc.detailTextView.text = @"Select a note";
+                dvc.detailBodyTextView.text = @"Select a note";
             } else {
-                dvc.detailTextView.text = @"Please add a new note";
+                dvc.detailBodyTextView.text = @"Please add a new note";
             }
             // delete current note
             dvc.currentNote = nil;

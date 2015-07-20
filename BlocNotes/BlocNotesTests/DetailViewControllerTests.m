@@ -21,7 +21,8 @@
 {
     DetailViewController *dvc;
     Note *n;
-    UITextView *tv;
+    UITextView *btv;
+    UITextView *ttv;
     
 }
 
@@ -32,9 +33,12 @@
     dvc = [[DetailViewController alloc]init];
     n = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[[NoteStore sharedInstance] managedObjectContext]];
     n.body = @"Body in setUp method";
+    n.title = @"Title in setUp method";
     dvc.currentNote = n;
-    tv = [[UITextView alloc]init];
-    dvc.detailTextView = tv;
+    btv = [[UITextView alloc]init];
+    dvc.detailBodyTextView = btv;
+    ttv = [[UITextView alloc] init];
+    dvc.detailTitleTextView = ttv;
     
     
 }
@@ -55,11 +59,11 @@
     
 }
 
-- (void)testThatEditsAreSaved
+- (void)testThatBodyEditsAreSaved
 {
-    dvc.detailTextView.text = dvc.currentNote.body;
+    dvc.detailBodyTextView.text = dvc.currentNote.body;
     XCTAssertEqualObjects(dvc.currentNote.body, @"Body in setUp method");
-    dvc.detailTextView.text = @"Body after edit";
+    dvc.detailBodyTextView.text = @"Body after edit";
     [dvc saveEdits];
     
     
@@ -70,6 +74,25 @@
     n = a.firstObject;
     
     XCTAssertEqualObjects(n.body, @"Body after edit");
+    
+}
+
+- (void)testThatTitleEditsAreSaved
+{
+    dvc.detailTitleTextView.text = dvc.currentNote.title;
+    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
+    dvc.detailTitleTextView.text = @"Title after edit";
+    [dvc saveEdits];
+    
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'Title after edit'"];
+    
+    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
+    
+    n = a.firstObject;
+    
+    XCTAssertEqualObjects(n.title, @"Title after edit");
+    
+    
 }
 
 - (void)testThatOnlyDVCsWithAssociatedNotesSaveEdits
@@ -80,8 +103,9 @@
     
     
     
-    
 }
+
+
 
 
 

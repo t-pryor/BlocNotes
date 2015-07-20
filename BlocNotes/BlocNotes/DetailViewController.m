@@ -21,19 +21,48 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.detailTextView.text = self.currentNote.body;
-   
+    // iOS7 adds content offset automatically to scroll views (which text views inherit from)
+    // set to NO on view controller to turn off behavior
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self setupTitleText];
+    [self setupBodyText];
+    
+}
+
+- (void)setupTitleText
+{
+    self.detailTitleTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.detailTitleTextView.text = self.currentNote.title;
+    self.detailTitleTextView.textColor = [UIColor blueColor];
+    
+}
+
+- (void)setupBodyText
+{
+    self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.detailBodyTextView.text = self.currentNote.body;
+
     // like Evernote, if user did not enter text during
     // initial note creation, show placeholder text in light gray
-    if ([self.detailTextView.text isEqualToString:@"Tap to edit"]) {
-        self.detailTextView.textColor = [UIColor lightGrayColor];
+    if ([self.detailBodyTextView.text isEqualToString:@"Tap to edit"]) {
+        self.detailBodyTextView.textColor = [UIColor lightGrayColor];
+    } else {
+        self.detailBodyTextView.textColor = [UIColor blackColor];
     }
+    
+    self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
+    
+
 }
+
 
 - (void)saveEdits
 {
-    if (![self.currentNote.body isEqualToString:self.detailTextView.text]) {
-        self.currentNote.body = self.detailTextView.text;
+    if (![self.currentNote.body isEqualToString:self.detailBodyTextView.text] || ![self.currentNote.title isEqualToString:self.detailTitleTextView.text]) {
+        
+        self.currentNote.title = self.detailTitleTextView.text;
+        self.currentNote.body = self.detailBodyTextView.text;
     
         NSError *error = nil;
         NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];
