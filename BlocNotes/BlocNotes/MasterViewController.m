@@ -132,7 +132,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = note.body;
+    cell.textLabel.text = note.title;
 }
 
 #pragma mark - Fetched results controller

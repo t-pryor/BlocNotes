@@ -37,8 +37,6 @@
     testStore1 = [[NoteStore alloc]init];
     testStore2 = [NoteStore sharedInstance];
     testStore3 = [NoteStore sharedInstance];
-    
-
   
 }
 

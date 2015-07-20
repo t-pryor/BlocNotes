@@ -34,7 +34,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap to edit" translatesAutoresizingMaskIntoConstraints="NO" id="9BG-Yh-3Lu">
                                 <rect key="frame" x="20" y="72" width="560" height="520"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -148,27 +148,40 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuO-ug-fBg">
-                                <rect key="frame" x="20" y="64" width="560" height="528"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eP6-IN-FUG" userLabel="Title Text">
+                                <rect key="frame" x="20" y="79" width="560" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3cf-3T-1Xd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuO-ug-fBg">
+                                <rect key="frame" x="20" y="127" width="560" height="465"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4P3-ru-y19" firstAttribute="top" secondItem="iUx-F0-phR" secondAttribute="bottom" symbolic="YES" id="0O4-Ru-rIp"/>
+                            <constraint firstItem="eP6-IN-FUG" firstAttribute="leading" secondItem="26t-uE-5lJ" secondAttribute="leading" constant="20" symbolic="YES" id="6ME-Bh-0U7"/>
                             <constraint firstItem="yuO-ug-fBg" firstAttribute="leading" secondItem="26t-uE-5lJ" secondAttribute="leading" constant="20" symbolic="YES" id="95M-1s-3EX"/>
                             <constraint firstAttribute="trailing" secondItem="yuO-ug-fBg" secondAttribute="trailing" constant="20" symbolic="YES" id="C6j-BM-Ycq"/>
+                            <constraint firstItem="yuO-ug-fBg" firstAttribute="top" secondItem="eP6-IN-FUG" secondAttribute="bottom" constant="8" symbolic="YES" id="CrR-vX-mID"/>
                             <constraint firstItem="LxP-TW-Q71" firstAttribute="top" secondItem="yuO-ug-fBg" secondAttribute="bottom" constant="8" symbolic="YES" id="DGt-jq-EgT"/>
+                            <constraint firstItem="eP6-IN-FUG" firstAttribute="width" secondItem="yuO-ug-fBg" secondAttribute="width" id="JJ7-ou-WPH"/>
+                            <constraint firstItem="eP6-IN-FUG" firstAttribute="top" secondItem="4P3-ru-y19" secondAttribute="bottom" constant="15" id="KAc-7S-h19"/>
                             <constraint firstAttribute="trailing" secondItem="4P3-ru-y19" secondAttribute="trailing" symbolic="YES" id="Srm-M5-1q9"/>
-                            <constraint firstItem="yuO-ug-fBg" firstAttribute="top" secondItem="4P3-ru-y19" secondAttribute="bottom" symbolic="YES" id="Twz-sA-bHm"/>
-                            <constraint firstItem="yuO-ug-fBg" firstAttribute="top" secondItem="4P3-ru-y19" secondAttribute="bottom" id="vOK-wQ-UyV"/>
                             <constraint firstItem="4P3-ru-y19" firstAttribute="leading" secondItem="26t-uE-5lJ" secondAttribute="leading" symbolic="YES" id="w5Y-my-r30"/>
+                            <constraint firstAttribute="trailing" secondItem="eP6-IN-FUG" secondAttribute="trailing" constant="20" symbolic="YES" id="wro-hD-Gb2"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="yuO-ug-fBg" id="PIV-ny-Cr1"/>
+                        <outlet property="bodyText" destination="yuO-ug-fBg" id="u9a-KX-CpV"/>
+                        <outlet property="titleText" destination="eP6-IN-FUG" id="W7z-sq-aVL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cTb-LA-0sa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,6 +205,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
 </document>

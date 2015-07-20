@@ -17,8 +17,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setupTitleText];
+    [self setupBodyText];
     
 }
+
+
+- (void)setupTitleText
+{
+    self.titleText.textColor = [UIColor blueColor];
+    self.titleText.text = @"Untitled Note";
+    self.titleText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    
+}
+
+
+- (void)setupBodyText
+{
+    self.bodyText.textColor = [UIColor blackColor];
+    self.bodyText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -33,12 +53,13 @@
 
 - (IBAction)savePressed:(id)sender
 {
-    if ([self.textView.text isEqualToString:@""]) {
-        self.textView.textColor = [UIColor blueColor];
-        self.textView.text = @"Tap to edit";
+    if ([self.bodyText.text isEqualToString:@""]) {
+        self.bodyText.text = @"Tap to edit";
     }
     
-    [self.currentNote setBody:self.textView.text];
+    [self.currentNote setTitle:self.titleText.text];
+    [self.currentNote setBody:self.bodyText.text];
+    
     [self.delegate addNoteViewControllerDidSave];
 
 }

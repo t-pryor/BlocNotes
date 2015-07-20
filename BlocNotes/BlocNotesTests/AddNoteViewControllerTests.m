@@ -63,7 +63,7 @@
     
     tv.text = @"";
     
-    anvc.textView = tv;
+    anvc.bodyText = tv;
     anvc.currentNote = n;
     
     [anvc savePressed:sender];
@@ -72,12 +72,15 @@
 
 - (void)testThatCancelPressedPerformsNoChanges
 {
-    anvc.textView = tv;
+    anvc.bodyText = tv;
     anvc.currentNote = n;
     [anvc cancelPressed:sender];
     
     
-    
+}
+
+- (void)testThatFontsAreSetupCorrectly
+{
     
 }
 

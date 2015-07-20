@@ -20,11 +20,19 @@
 @property (nonatomic, weak) Note *currentNote;
 
 
+
+
+@property (weak, nonatomic) IBOutlet UITextView *titleText;
+
+
+
 /**
  This stores the text being entered by the user.
  This info passed to currentNote.body when save is entered.
  */
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+@property (weak, nonatomic) IBOutlet UITextView *bodyText;
+
 
 
 /**
