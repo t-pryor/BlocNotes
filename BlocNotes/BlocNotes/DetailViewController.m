@@ -28,6 +28,10 @@
     [self setupTitleText];
     [self setupBodyText];
     
+   // self.navigationItem.backBarButtonItem.title = @"All Notes";
+    
+    
+    
 }
 
 - (void)setupTitleText

@@ -14,9 +14,6 @@
 
 @interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate>
 
-@property (strong, nonatomic) DetailViewController *detailViewController;
-
-
 
 /**
  Manages communication between the Note Store and the table view.

@@ -60,7 +60,9 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Foobar" id="mOI-FS-AaM">
+                        <barButtonItem key="backBarButtonItem" title="All Notesz" id="9Ty-ll-AyT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailBodyTextView" destination="9BG-Yh-3Lu" id="1nW-zf-d7w"/>
                         <outlet property="detailTitleTextView" destination="F8A-0R-SIs" id="zIK-X1-Bf0"/>
@@ -84,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Master-->
+        <!--All Notes-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" sceneMemberID="viewController">
+                <tableViewController title="All Notes" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +156,7 @@
                                                 <action selector="cancelPressed:" destination="zQb-nn-vUY" id="fUi-PV-Shq"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="r33-Ui-DhL">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="r33-Ui-DhL">
                                             <connections>
                                                 <action selector="savePressed:" destination="zQb-nn-vUY" id="2wU-Ui-swg"/>
                                             </connections>
