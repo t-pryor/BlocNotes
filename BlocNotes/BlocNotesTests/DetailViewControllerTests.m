@@ -31,7 +31,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     dvc = [[DetailViewController alloc]init];
-    n = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[[NoteStore sharedInstance] managedObjectContext]];
+    n = [[NoteStore sharedInstance] createNote];
     n.body = @"Body in setUp method";
     n.title = @"Title in setUp method";
     dvc.currentNote = n;
@@ -39,7 +39,6 @@
     dvc.detailBodyTextView = btv;
     ttv = [[UITextView alloc] init];
     dvc.detailTitleTextView = ttv;
-    
     
 }
 
@@ -94,6 +93,34 @@
     
     
 }
+
+- (void)testThatDateModifiedIsSaved
+{
+    dvc.detailTitleTextView.text = dvc.currentNote.title;
+    
+    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
+    dvc.detailTitleTextView.text = @"zzzzzTitle after edit in date modified test methodz";
+    NSDate *date = [NSDate date];
+    
+    [dvc saveEdits];
+    
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'zzzzzTitle after edit in date modified test methodz'"];
+    
+    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
+    
+    n = a.firstObject;
+
+    NSDate *modifiedDate = n.dateModified;
+    
+    [[NoteStore sharedInstance] deleteNote:n];
+    
+    XCTAssertTrue([date laterDate:modifiedDate] == modifiedDate);
+    
+    NSDate *d = [date laterDate:modifiedDate];
+    
+    
+}
+
 
 - (void)testThatOnlyDVCsWithAssociatedNotesSaveEdits
 {

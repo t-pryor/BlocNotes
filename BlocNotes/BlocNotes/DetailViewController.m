@@ -63,6 +63,8 @@
         
         self.currentNote.title = self.detailTitleTextView.text;
         self.currentNote.body = self.detailBodyTextView.text;
+        self.currentNote.dateModified = [NSDate date];
+        
     
         NSError *error = nil;
         NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];

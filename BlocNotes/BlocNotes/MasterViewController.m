@@ -58,7 +58,7 @@
         AddNoteViewController *anvc = (AddNoteViewController *)[segue destinationViewController];
         anvc.delegate = self;
 
-        Note *newNote = [[NoteStore sharedInstance] createNoteWithBody:@""];
+        Note *newNote = [[NoteStore sharedInstance] createNoteWithTitle:@""];
         anvc.currentNote = newNote;
     }
     
@@ -146,7 +146,7 @@
   
     NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
                                     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"masterVCCache"];
   
     aFetchedResultsController.delegate = self;
   

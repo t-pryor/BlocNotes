@@ -51,6 +51,8 @@
 {
   self = [super init];
   
+  
+    
   return self;
 }
 
@@ -91,6 +93,8 @@
                   insertNewObjectForEntityForName:@"Note"
                   inManagedObjectContext:self.managedObjectContext];
     
+    note.dateCreated = [NSDate date];
+    note.dateModified = note.dateCreated;
     [self.privateNotes addObject:note];
     return note;
 }
@@ -102,6 +106,7 @@
                           inManagedObjectContext:self.managedObjectContext];
     note.body = body;
     note.dateCreated = [NSDate date];
+    note.dateModified = note.dateCreated;
     [self.privateNotes addObject:note];
     
     return note;
@@ -115,7 +120,10 @@
     
     note.title = title;
     note.dateCreated = [NSDate date];
+    note.dateModified = note.dateCreated;
+    
     [self.privateNotes addObject:note];
+    
     
     return note;
 }
@@ -164,7 +172,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateModified" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];

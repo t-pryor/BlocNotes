@@ -142,7 +142,7 @@
     
     [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testAllNotes method"];
     
-    int countAfterCreation = [[[NoteStore sharedInstance] allNotes]count];
+    NSInteger countAfterCreation = [[[NoteStore sharedInstance] allNotes]count];
     
     Note *testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
     Note *testNoteB = [[[NoteStore sharedInstance]allNotes]lastObject];
@@ -151,7 +151,7 @@
     
     [[NoteStore sharedInstance] deleteNote:testNoteA];
     
-    int countAfterDeletion = [[[NoteStore sharedInstance] allNotes]count];
+    NSInteger countAfterDeletion = [[[NoteStore sharedInstance] allNotes]count];
     
     testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
     

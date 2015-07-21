@@ -29,6 +29,8 @@
     
     // Initialize our Note Store
     [NoteStore sharedInstance];
+    NSArray *ar = [[NoteStore sharedInstance] allNotes];
+    
     
     return YES;
 }

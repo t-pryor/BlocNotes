@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 
-
 + (instancetype)sharedInstance;
 - (Note *)createNote;
 - (void)saveContext;
@@ -38,6 +37,8 @@
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes;
 
 - (Note *)createNoteWithTitle:(NSString *)title;
+
+
 
 
 @end
