@@ -20,14 +20,14 @@
     
     self.navItem.title = @"New Note";
     
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sharePressed:)];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed)];
    
    
     self.navItem.rightBarButtonItems = @[saveButton, shareButton];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
     
     self.navItem.leftBarButtonItem = cancelButton;
     
@@ -61,15 +61,16 @@
 }
 
 
-- (void)cancelPressed:(id)sender
+- (void)cancelPressed
 {
     [self.delegate addNoteViewControllerDidCancel:self.currentNote];
 }
 
-- (void)savePressed:(id)sender
+- (void)savePressed
 {
     if ([self.bodyText.text isEqualToString:@""]) {
         self.bodyText.text = @"Tap to edit";
+    //    [NSThread sleepForTimeInterval:2.6];
     }
     
     [self.currentNote setTitle:self.titleText.text];
@@ -78,5 +79,23 @@
     [self.delegate addNoteViewControllerDidSave];
 
 }
+
+- (void)sharePressed:(id)sender
+{
+        
+    NSArray *objectsToShare = @[self.titleText.text, self.bodyText.text];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+    
+    UIPopoverPresentationController *pop = activityVC.popoverPresentationController;
+    pop.barButtonItem = sender;
+    
+}
+
+
+
 
 @end

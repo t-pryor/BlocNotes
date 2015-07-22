@@ -66,7 +66,7 @@
     anvc.bodyText = tv;
     anvc.currentNote = n;
     
-    [anvc savePressed:sender];
+    [anvc savePressed];
     XCTAssertTrue(anvc.currentNote.body.length > 0);
 }
 
@@ -74,7 +74,7 @@
 {
     anvc.bodyText = tv;
     anvc.currentNote = n;
-    [anvc cancelPressed:sender];
+    [anvc cancelPressed];
     
 }
 

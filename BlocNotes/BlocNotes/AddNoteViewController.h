@@ -45,13 +45,13 @@
 /**
  This calls the delegate's addNoteViewControllerDidCancel: method when the cancel button is pressed
  */
-- (void)cancelPressed:(id)sender;
+- (void)cancelPressed;
 
 
 /**
  This calls the delegate's addNoteViewControllerDidSave: method when the save button is pressed
  */
-- (void)savePressed:(id)sender;
+- (void)savePressed;
 
 @end
 
