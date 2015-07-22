@@ -21,14 +21,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.title = @"Note Details";
+    
     // iOS7 adds content offset automatically to scroll views (which text views inherit from)
     // set to NO on view controller to turn off behavior
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    
     [self setupTitleText];
     [self setupBodyText];
     
-   // self.navigationItem.backBarButtonItem.title = @"All Notes";
+    
+    //self.navigationItem.leftBarButtonItem = nil;
     
     
     
@@ -84,6 +88,7 @@
     // only commit edits if currentNote exists
     // currentNote won't exist after deleting note in master
     if (self.currentNote) [self saveEdits];
+    
 }
 
 

@@ -29,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"All Notes";
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,8 +107,10 @@
             DetailViewController *dvc = (DetailViewController *)[[nav viewControllers] firstObject];
             
             if ([self.tableView numberOfRowsInSection:0] > 1) {
+                dvc.detailTitleTextView.text = @"";
                 dvc.detailBodyTextView.text = @"Select a note";
             } else {
+                dvc.detailTitleTextView.text = @"";
                 dvc.detailBodyTextView.text = @"Please add a new note";
             }
             // delete current note

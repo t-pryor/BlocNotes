@@ -17,6 +17,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.navItem.title = @"New Note";
+    
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
+    
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
+   
+   
+    self.navItem.rightBarButtonItems = @[saveButton, shareButton];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    
+    self.navItem.leftBarButtonItem = cancelButton;
+    
+    
     [self setupTitleText];
     [self setupBodyText];
     
@@ -46,12 +61,12 @@
 }
 
 
-- (IBAction)cancelPressed:(id)sender
+- (void)cancelPressed:(id)sender
 {
     [self.delegate addNoteViewControllerDidCancel:self.currentNote];
 }
 
-- (IBAction)savePressed:(id)sender
+- (void)savePressed:(id)sender
 {
     if ([self.bodyText.text isEqualToString:@""]) {
         self.bodyText.text = @"Tap to edit";

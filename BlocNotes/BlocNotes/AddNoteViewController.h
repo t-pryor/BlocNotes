@@ -40,17 +40,18 @@
  */
 @property (nonatomic, weak) id <AddNoteViewControllerDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 
 /**
  This calls the delegate's addNoteViewControllerDidCancel: method when the cancel button is pressed
  */
-- (IBAction)cancelPressed:(id)sender;
+- (void)cancelPressed:(id)sender;
 
 
 /**
  This calls the delegate's addNoteViewControllerDidSave: method when the save button is pressed
  */
-- (IBAction)savePressed:(id)sender;
+- (void)savePressed:(id)sender;
 
 @end
 

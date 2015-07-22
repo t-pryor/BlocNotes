@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap to edit" translatesAutoresizingMaskIntoConstraints="NO" id="9BG-Yh-3Lu">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BG-Yh-3Lu">
                                 <rect key="frame" x="20" y="127" width="560" height="465"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -60,9 +60,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Foobar" id="mOI-FS-AaM">
-                        <barButtonItem key="backBarButtonItem" title="All Notesz" id="9Ty-ll-AyT"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="detailBodyTextView" destination="9BG-Yh-3Lu" id="1nW-zf-d7w"/>
                         <outlet property="detailTitleTextView" destination="F8A-0R-SIs" id="zIK-X1-Bf0"/>
@@ -123,7 +121,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Notes" id="5kJ-IX-Jhr">
+                    <navigationItem key="navigationItem" id="5kJ-IX-Jhr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yhm-S5-VUa">
                             <connections>
                                 <segue destination="zQb-nn-vUY" kind="presentation" identifier="addNote" id="deH-pP-GoB"/>
@@ -150,17 +148,8 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4P3-ru-y19">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="New Note" id="Nwb-Sn-Hjj">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Wl5-V5-0bk">
-                                            <connections>
-                                                <action selector="cancelPressed:" destination="zQb-nn-vUY" id="fUi-PV-Shq"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="r33-Ui-DhL">
-                                            <connections>
-                                                <action selector="savePressed:" destination="zQb-nn-vUY" id="2wU-Ui-swg"/>
-                                            </connections>
-                                        </barButtonItem>
+                                    <navigationItem id="Nwb-Sn-Hjj">
+                                        <nil key="title"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -197,6 +186,7 @@
                     </view>
                     <connections>
                         <outlet property="bodyText" destination="yuO-ug-fBg" id="u9a-KX-CpV"/>
+                        <outlet property="navItem" destination="Nwb-Sn-Hjj" id="tDc-xm-OJI"/>
                         <outlet property="titleText" destination="eP6-IN-FUG" id="W7z-sq-aVL"/>
                     </connections>
                 </viewController>

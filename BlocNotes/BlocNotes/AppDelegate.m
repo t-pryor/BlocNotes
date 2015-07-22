@@ -26,7 +26,6 @@
     splitViewController.delegate = self;
     // Like Evernote, keep Master visible in iPad portrait mode
     splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-    
     // Initialize our Note Store
     [NoteStore sharedInstance];
     
