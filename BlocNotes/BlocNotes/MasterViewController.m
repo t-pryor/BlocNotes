@@ -54,6 +54,11 @@
         dvc.currentNote = currentNote;
         dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         dvc.navigationItem.leftItemsSupplementBackButton = YES;
+        
+        
+
+        
+        
   }
     
     if ([[segue identifier] isEqualToString:@"addNote"]) {
@@ -244,6 +249,17 @@
     
     
 }
+
+- (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController:(UIViewController *)childViewController
+{
+    if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone ];
+            
+    } else {
+        return nil;
+    }
+}
+
 
 - (void)addNoteViewControllerDidSave
 {

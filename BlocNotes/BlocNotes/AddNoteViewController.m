@@ -82,7 +82,7 @@
 
 - (void)sharePressed:(id)sender
 {
-        
+    
     NSArray *objectsToShare = @[self.titleText.text, self.bodyText.text];
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];

@@ -29,6 +29,10 @@
     // Initialize our Note Store
     [NoteStore sharedInstance];
     
+//    UITraitCollection *traitCollection = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
+//    
+//    navigationControllerForDetailVC setOverrideTraitCollection:traitCollection forChildViewController:<#(UIViewController *)#>
+    
     
     return YES;
 }
@@ -71,7 +75,6 @@
 }
 
 // for iPhone 6 plus in portrait, default behavior is to expand to show detail view controller. We leave it as is.
-
 
 
 

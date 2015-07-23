@@ -32,12 +32,19 @@
     [self setupBodyText];
     
     
-    //self.navigationItem.leftBarButtonItem = nil;
     
-    
-    
-}
 
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sharePressed:)];
+    
+    self.navigationItem.rightBarButtonItem = shareButton;
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
+    
+    if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        self.navigationItem.leftBarButtonItem = doneButton;
+
+    }
+}
 - (void)setupTitleText
 {
     self.detailTitleTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -83,11 +90,47 @@
 }
 
 
+- (void)sharePressed:(id)sender
+{
+    
+    NSArray *objectsToShare = @[self.currentNote.title, self.currentNote.body];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+    
+    UIPopoverPresentationController *pop = activityVC.popoverPresentationController;
+    pop.barButtonItem = sender;
+    
+}
+
+- (void)donePressed:(id)sender
+{
+    UITraitCollection *traitCollection_idiomPhone = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
+    
+    UITraitCollection *traitCollection_hCompact = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
+    UITraitCollection *traitCollection_vRegular = [UITraitCollection traitCollectionWithVerticalSizeClass:UIUserInterfaceSizeClassRegular];
+    
+    
+    NSArray *traitsArray = @[traitCollection_idiomPhone, traitCollection_hCompact, traitCollection_vRegular];
+    
+    UITraitCollection *traitCollection= [UITraitCollection traitCollectionWithTraitsFromCollections:traitsArray];
+    
+    [self.splitViewController setOverrideTraitCollection:traitCollection forChildViewController:self.splitViewController.viewControllers[0]];
+
+    NSLog(@"----------- %@", [self.splitViewController.viewControllers[0] traitCollection]);
+
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     // only commit edits if currentNote exists
     // currentNote won't exist after deleting note in master
     if (self.currentNote) [self saveEdits];
+    
+    UITraitCollection *traitCollection = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
+    
+    [self.navigationController.splitViewController setOverrideTraitCollection:traitCollection forChildViewController:self.splitViewController.viewControllers[0]];
     
 }
 
