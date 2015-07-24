@@ -68,7 +68,6 @@
     
     self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
     
-
 }
 
 
