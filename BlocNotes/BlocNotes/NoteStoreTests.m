@@ -14,161 +14,127 @@
 
 @end
 
-@implementation NoteStoreTests
 
+@implementation NoteStoreTests
 {
-    
     Note *testNote1;
     Note *testNote2;
+    Note *testNote3;
+    Note *testNote4;
     
+    NoteStore *testStore0;
     NoteStore *testStore1;
     NoteStore *testStore2;
-    NoteStore *testStore3;
-    
 }
 
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     
-    testNote1 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote1 title"];
-    testNote2 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote2 title"];
+    testNote1 = [[NoteStore sharedInstance] createNote];
+    testNote2 = [[NoteStore sharedInstance] createNote];
     
-    testStore1 = [[NoteStore alloc]init];
+    testNote3 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote3 title"];
+    testNote4 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote4 title"];
+    
+    testStore0 = [[NoteStore alloc]init];
+    testStore1 = [NoteStore sharedInstance];
     testStore2 = [NoteStore sharedInstance];
-    testStore3 = [NoteStore sharedInstance];
-  
 }
 
-- (void)tearDown {
+
+- (void)tearDown
+{
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
     [[NoteStore sharedInstance] deleteNote:testNote1];
     [[NoteStore sharedInstance] deleteNote:testNote2];
-    
 }
 
-
-// Testing: Test init method
 
 - (void)testInitReturnsNil
 {
-    XCTAssertNil(testStore1);
+    // testStore0 uses NoteStore's init method, which should return nil
+    // when using NoteStore, need to use singleton [NoteStore sharedInstance], which in turn calls its non-public initPrivate method
+    XCTAssertNil(testStore0);
 }
 
-
-/*** [NoteStore sharedInstance] and associated initPrivate method ***/
 
 - (void)testNoteStoreSharedInstanceReturnsNoteStoreSingleton
 {
-    XCTAssertEqualObjects(testStore2, testStore3);
+    // testStore1 and testStore2 both call [NoteStore sharedInstance] singleton
+    // they should both reference the same object
+    XCTAssertEqualObjects(testStore1, testStore2);
 }
+
 
 - (void)testThatCreateNoteSuccessfullyCreatesNote
 {
-    testNote1 = [[NoteStore sharedInstance] createNote];
-    
     XCTAssertEqualObjects([testNote1 class], [Note class]);
 }
 
 
-/*
-
- 
 - (void)testCreateNoteWithTitleCreatesNote
 {
-    XCTAssertEqualObjects(testNote1.title, @"testNote1 title");
+    XCTAssertEqualObjects([testNote3 class], [Note class]);
 }
 
-
-- (void)testFetch
-{
- 
-    NSArray *fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:nil andSortDescriptors:nil];
-    
-    NSLog(@"fetched notes: %@", fetchedNotes);
-    
-    NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"title == 'testNote1 title'"];
-    
-    fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:nil];
-    
-    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote1.title);
-
-    
-    NSSortDescriptor *testSort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
-    
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:testSort,nil];
-    
-    testPredicate = [NSPredicate predicateWithFormat:@"title LIKE '*title*'"];
-    
-    
-    fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
-    
-    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote2.title);
-    
-    testPredicate = [NSPredicate predicateWithFormat:@"title CONTAINS 'testNote2'"];
-    
-    fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
-    
-    XCTAssertEqualObjects([[fetchedNotes firstObject] title], testNote2.title);
-    
-    testPredicate = [NSPredicate predicateWithFormat:@"body CONTAINS 'foo'"];
-    
-    fetchedNotes = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:testPredicate andSortDescriptors:sortDescriptors];
-
-    XCTAssertNil([fetchedNotes firstObject]);
-    
-}
 
 - (void)testAllNotesGetter
 {
-    Note *testNote3 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote3 title"];
-    
-    XCTAssertEqualObjects(testNote3, [[[NoteStore sharedInstance] allNotes] lastObject]);
-    
-    [[NoteStore sharedInstance] deleteNote:testNote3];
+    // create a new testNote, which should be added as the last item in the public allNotes array
+    Note *testNote5 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote5 title"];
+    XCTAssertEqualObjects(testNote5, [[[NoteStore sharedInstance] allNotes] lastObject]);
+    [[NoteStore sharedInstance] deleteNote:testNote5];
 }
-
 
 
 - (void)testDeleteNote
 {
+    NSInteger countBeforeCreation = [[[NoteStore sharedInstance] allNotes] count];
 
-    //[[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testDeleteNote method"];
+    // this will add two notes to the NoteStore's privateNotes array (a copy of which is returned by the allNotes method)
+    [[NoteStore sharedInstance] createNoteWithTitle:@"Note A"];
+    [[NoteStore sharedInstance] createNoteWithTitle:@"Note B"];
     
-    //[[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testAllNotes method"];
+    NSInteger countAfterCreation = [[[NoteStore sharedInstance] allNotes] count];
     
-    NSInteger countAfterCreation = [[[NoteStore sharedInstance] allNotes]count];
+    // verify that these two notes were added to the privateNotes array
+    XCTAssertEqual(countBeforeCreation, countAfterCreation-2);
     
-    Note *testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
-    Note *testNoteB = [[[NoteStore sharedInstance]allNotes]lastObject];
+    // testNoteY and testNoteZ are both references to the same object: the last object in the Array
+    // this last object would be a note with title @"Note B"
+    Note *testNoteY = [[[NoteStore sharedInstance] allNotes] lastObject];
+    Note *testNoteZ = [[[NoteStore sharedInstance] allNotes] lastObject];
     
-    XCTAssertEqualObjects(testNoteA, testNoteB);
+    // Both testNotes have the same title
+    XCTAssertTrue([testNoteY.title isEqualToString:@"Note B"]);
+    XCTAssertTrue([testNoteZ.title isEqualToString:@"Note B"]);
+    // Both testNotes point to the same Note object
+    XCTAssertEqualObjects(testNoteY, testNoteZ);
     
-    [[NoteStore sharedInstance] deleteNote:testNoteA];
+    // This will delete the last element of the testNotes array
+    // The last element now points to a note with the title @"Note A"
+    [[NoteStore sharedInstance] deleteNote:testNoteY];
     
     NSInteger countAfterDeletion = [[[NoteStore sharedInstance] allNotes]count];
-    
-    testNoteA = [[[NoteStore sharedInstance]allNotes]lastObject];
-    
-    XCTAssertNotEqualObjects(testNoteA, testNoteB);
+    // Verify that the last element in allNotes was deleted
     XCTAssertEqual(countAfterDeletion, countAfterCreation - 1);
     
-    [[NoteStore sharedInstance] deleteNote:testNoteB];
+    // testNoteY now points to the last object, which should have title @"Note A"
+    testNoteY = [[[NoteStore sharedInstance]allNotes]lastObject];
+    XCTAssertTrue([testNoteY.title isEqualToString:@"Note A"]);
 
+    // therefore, the Note with title "Note B" was removed from the privateNotes array
+    
+    // testNoteZ still points to the Note with title @"Note B"
+    XCTAssertTrue([testNoteZ.title isEqualToString:@"Note B"]);
+    
+    // verify these point to different Note objects
+    XCTAssertNotEqualObjects(testNoteY, testNoteZ);
 }
-
-
-
-*/
-
-
-
-
-
-
-
 
 
 @end
