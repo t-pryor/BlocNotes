@@ -27,13 +27,9 @@
     // set to NO on view controller to turn off behavior
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
     [self setupTitleText];
     [self setupBodyText];
     
-    
-    
-
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sharePressed:)];
     
     self.navigationItem.rightBarButtonItem = shareButton;

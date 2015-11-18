@@ -72,13 +72,10 @@
     XCTAssertEqualObjects([testNote1 class], [Note class]);
 }
 
-- (void)testThatCreateNoteWithBodyCreatesNote
-{
-    testNote1 = [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note"];
-    
-    XCTAssertEqualObjects(testNote1.body , @"This is the body of a test note");
-}
 
+/*
+
+ 
 - (void)testCreateNoteWithTitleCreatesNote
 {
     XCTAssertEqualObjects(testNote1.title, @"testNote1 title");
@@ -138,9 +135,9 @@
 - (void)testDeleteNote
 {
 
-    [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testDeleteNote method"];
+    //[[NoteStore sharedInstance] createNoteWithBody:@"This is the body of a test note in the testDeleteNote method"];
     
-    [[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testAllNotes method"];
+    //[[NoteStore sharedInstance] createNoteWithBody:@"This is the body of another test note in the testAllNotes method"];
     
     NSInteger countAfterCreation = [[[NoteStore sharedInstance] allNotes]count];
     
@@ -164,7 +161,7 @@
 
 
 
-
+*/
 
 
 

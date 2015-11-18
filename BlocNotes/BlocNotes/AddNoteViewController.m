@@ -7,6 +7,7 @@
 //
 
 #import "AddNoteViewController.h"
+#import "NoteStore.h"
 
 @interface AddNoteViewController ()
 
@@ -51,7 +52,6 @@
 {
     self.bodyText.textColor = [UIColor blackColor];
     self.bodyText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    
 }
 
 
@@ -66,6 +66,7 @@
     [self.delegate addNoteViewControllerDidCancel:self.currentNote];
 }
 
+
 - (void)savePressed
 {
     if ([self.bodyText.text isEqualToString:@""]) {
@@ -77,8 +78,8 @@
     [self.currentNote setBody:self.bodyText.text];
     
     [self.delegate addNoteViewControllerDidSave];
-
 }
+
 
 - (void)sharePressed:(id)sender
 {

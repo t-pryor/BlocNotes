@@ -10,107 +10,95 @@
 #import "Note.h"
 
 
-
 @interface NoteStore ()
 
-@property (nonatomic) NSMutableArray *privateNotes;
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (nonatomic) NSMutableArray *privateNotes;
+@property (nonatomic, strong) dispatch_queue_t concurrentNoteQueue;
 
 @end
 
-@implementation NoteStore
 
+@implementation NoteStore
 
 + (instancetype)sharedInstance
 {
-  static dispatch_once_t onceToken;
-  
-  static id sharedInstance;
-  dispatch_once(&onceToken, ^{
-    sharedInstance = [[self alloc] initPrivate];
-  });
-  
-  return sharedInstance;
+    static NoteStore *sharedNoteStore = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        sharedNoteStore = [[self alloc] initPrivate];
+        sharedNoteStore->_privateNotes = [[NSMutableArray alloc] init];
+        sharedNoteStore ->_concurrentNoteQueue = dispatch_queue_create("io.bloc.BlocNotes.noteQueue", DISPATCH_QUEUE_CONCURRENT);
+    });
+
+    return sharedNoteStore;
 }
 
 
 - (instancetype)init
 {
-  NSException *ex = [NSException exceptionWithName:@"Singleton"
+    NSException *ex = [NSException exceptionWithName:@"Singleton"
                           reason:@"Use +[NoteStore sharedInstance]"
                         userInfo:nil];
   
-  NSLog(@"Exception: %@", ex);
-  return nil;
+    NSLog(@"Exception: %@", ex);
+    return nil;
 }
 
 
 - (instancetype)initPrivate
 {
-  self = [super init];
-  
-  
-    
-  return self;
+    self = [super init];
+    return self;
 }
-
 
 
 - (NSArray *)allNotes
 {
-  return [self.privateNotes copy];
+    __block NSArray *array;
+    
+    // need to perform synchronously because need to return the array after dispatch
+    dispatch_sync(self.concurrentNoteQueue, ^{
+        array = [self.privateNotes copy];
+    });
+    
+    return array;
 }
 
 
 - (NSString *)notePath
 {
-  NSArray *documentDirectories =
-  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  
-  // Get one and only document directory from that list
-  NSString *documentDirectory = [documentDirectories firstObject];
-  
-  return [documentDirectory stringByAppendingPathComponent:@"store.data"];
+    NSArray *documentDirectories =
+    NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    // Get one and only document directory from that list
+    NSString *documentDirectory = [documentDirectories firstObject];
+
+    return [documentDirectory stringByAppendingPathComponent:@"store.data"];
 }
 
 
-- (BOOL)saveChanges //should call when moving to background
-{
-  NSError *error;
-  BOOL successful = [self.managedObjectContext save:&error];
-  if (!successful) {
-    NSLog(@"Error saving: %@", [error localizedDescription]);
-  }
-  return successful;
-}
-
+/* SHOULD WE HAVE ONLY ONE WAY TO CREATE NOTE??? */
 
 - (Note *)createNote
 {
     Note *note = [NSEntityDescription
                   insertNewObjectForEntityForName:@"Note"
-                  inManagedObjectContext:self.managedObjectContext];
+                  inManagedObjectContext: self.managedObjectContext];
     
     note.dateCreated = [NSDate date];
     note.dateModified = note.dateCreated;
-    [self.privateNotes addObject:note];
+    
+    dispatch_barrier_async(self.concurrentNoteQueue, ^{
+        [self.privateNotes addObject:note];
+    });
+    
     return note;
 }
 
-- (Note *)createNoteWithBody:(NSString *)body
-{
-    Note *note = (Note *)[NSEntityDescription
-                          insertNewObjectForEntityForName:@"Note"
-                          inManagedObjectContext:self.managedObjectContext];
-    note.body = body;
-    note.dateCreated = [NSDate date];
-    note.dateModified = note.dateCreated;
-    [self.privateNotes addObject:note];
-    
-    return note;
-}
 
 -(Note *)createNoteWithTitle:(NSString *)title
 {
@@ -122,45 +110,21 @@
     note.dateCreated = [NSDate date];
     note.dateModified = note.dateCreated;
     
-    [self.privateNotes addObject:note];
-    
+    dispatch_barrier_async(self.concurrentNoteQueue, ^{
+        [self.privateNotes addObject:note];
+    });
     
     return note;
 }
 
-- (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize predicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDescriptors
-{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    
-    [fetchRequest setFetchBatchSize:batchSize];
-    
-    // Specify criteria for filtering which objects to fetch
-    [fetchRequest setPredicate:predicate];
-    
-    // Specify how the fetched objects should be sorted
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if (fetchedObjects == nil) {
-        NSLog(@"Problem! %@", error);
-    }
-    
-    return fetchedObjects;
-
-}
 
 - (void)deleteNote:(Note *)note
 {
     [self.managedObjectContext deleteObject:note];
     [self.privateNotes removeObjectIdenticalTo:note];
     note = nil;
-  
 }
+
 
 - (NSFetchRequest *)createInitialFetchRequest
 {
@@ -183,22 +147,32 @@
 
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes
 {
-    self.privateNotes = [[NSMutableArray alloc] initWithArray:notes];
+    __block NSMutableArray *array;
+ 
+    dispatch_sync(self.concurrentNoteQueue, ^{
+        array = [notes mutableCopy];
+    });
     
+    self.privateNotes = array;
 }
 
 
 
 #pragma mark - Core Data stack
 
+
+// The following code is Apple boilerplate
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "io.medux.BlocNotes" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
 
 - (NSManagedObjectModel *)managedObjectModel {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
@@ -209,6 +183,7 @@
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
+
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
@@ -270,8 +245,6 @@
         }
     }
 }
-
-
 
 
 @end

@@ -10,35 +10,26 @@
 
 #import <Foundation/Foundation.h>
 #import "Note.h"
-
 #define SHAREDSTORE [NoteStore sharedInstance];
+
 
 @interface NoteStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allNotes;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-
 + (instancetype)sharedInstance;
+
 - (Note *)createNote;
+
 - (void)saveContext;
-- (void) deleteNote: (Note *)note;
 
-
-- (Note *)createNoteWithBody:(NSString *)body;
-
-- (NSArray *)fetchNotesWithBatchSize:(NSUInteger)batchSize
-                                    predicate:(NSPredicate *)predicate
-
-                           andSortDescriptors:(NSArray *)sortDescriptors;
+- (void)deleteNote:(Note *)note;
 
 - (NSFetchRequest *)createInitialFetchRequest;
 
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes;
 
 - (Note *)createNoteWithTitle:(NSString *)title;
-
-
-
 
 @end

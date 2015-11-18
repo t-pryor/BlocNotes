@@ -58,68 +58,68 @@
     
 }
 
-- (void)testThatBodyEditsAreSaved
-{
-    dvc.detailBodyTextView.text = dvc.currentNote.body;
-    XCTAssertEqualObjects(dvc.currentNote.body, @"Body in setUp method");
-    dvc.detailBodyTextView.text = @"Body after edit";
-    [dvc saveEdits];
-    
-    
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"body == 'Body after edit'"];
-    
-    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
-    
-    n = a.firstObject;
-    
-    XCTAssertEqualObjects(n.body, @"Body after edit");
-    
-}
+//- (void)testThatBodyEditsAreSaved
+//{
+//    dvc.detailBodyTextView.text = dvc.currentNote.body;
+//    XCTAssertEqualObjects(dvc.currentNote.body, @"Body in setUp method");
+//    dvc.detailBodyTextView.text = @"Body after edit";
+//    [dvc saveEdits];
+//    
+//    
+//    NSPredicate *p = [NSPredicate predicateWithFormat:@"body == 'Body after edit'"];
+//    
+//    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
+//    
+//    n = a.firstObject;
+//    
+//    XCTAssertEqualObjects(n.body, @"Body after edit");
+//    
+//}
 
-- (void)testThatTitleEditsAreSaved
-{
-    dvc.detailTitleTextView.text = dvc.currentNote.title;
-    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
-    dvc.detailTitleTextView.text = @"Title after edit";
-    [dvc saveEdits];
-    
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'Title after edit'"];
-    
-    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
-    
-    n = a.firstObject;
-    
-    XCTAssertEqualObjects(n.title, @"Title after edit");
-    
-    
-}
+//- (void)testThatTitleEditsAreSaved
+//{
+//    dvc.detailTitleTextView.text = dvc.currentNote.title;
+//    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
+//    dvc.detailTitleTextView.text = @"Title after edit";
+//    [dvc saveEdits];
+//    
+//    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'Title after edit'"];
+//    
+//    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
+//    
+//    n = a.firstObject;
+//    
+//    XCTAssertEqualObjects(n.title, @"Title after edit");
+//    
+//    
+//}
 
-- (void)testThatDateModifiedIsSaved
-{
-    dvc.detailTitleTextView.text = dvc.currentNote.title;
-    
-    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
-    dvc.detailTitleTextView.text = @"zzzzzTitle after edit in date modified test methodz";
-    NSDate *date = [NSDate date];
-    
-    [dvc saveEdits];
-    
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'zzzzzTitle after edit in date modified test methodz'"];
-    
-    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
-    
-    n = a.firstObject;
-
-    NSDate *modifiedDate = n.dateModified;
-    
-    [[NoteStore sharedInstance] deleteNote:n];
-    
-    XCTAssertTrue([date laterDate:modifiedDate] == modifiedDate);
-    
-    NSDate *d = [date laterDate:modifiedDate];
-    
-    
-}
+//- (void)testThatDateModifiedIsSaved
+//{
+//    dvc.detailTitleTextView.text = dvc.currentNote.title;
+//    
+//    XCTAssertEqualObjects(dvc.currentNote.title, @"Title in setUp method");
+//    dvc.detailTitleTextView.text = @"zzzzzTitle after edit in date modified test methodz";
+//    NSDate *date = [NSDate date];
+//    
+//    [dvc saveEdits];
+//    
+//    NSPredicate *p = [NSPredicate predicateWithFormat:@"title == 'zzzzzTitle after edit in date modified test methodz'"];
+//    
+//    NSArray *a = [[NoteStore sharedInstance] fetchNotesWithBatchSize:20 predicate:p andSortDescriptors:nil];
+//    
+//    n = a.firstObject;
+//
+//    NSDate *modifiedDate = n.dateModified;
+//    
+//    [[NoteStore sharedInstance] deleteNote:n];
+//    
+//    XCTAssertTrue([date laterDate:modifiedDate] == modifiedDate);
+//    
+//    NSDate *d = [date laterDate:modifiedDate];
+//    
+//    
+//}
 
 
 - (void)testThatOnlyDVCsWithAssociatedNotesSaveEdits

@@ -54,11 +54,6 @@
         dvc.currentNote = currentNote;
         dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         dvc.navigationItem.leftItemsSupplementBackButton = YES;
-        
-        
-
-        
-        
   }
     
     if ([[segue identifier] isEqualToString:@"addNote"]) {
@@ -72,8 +67,7 @@
 }
 
 
-#pragma mark - Table View
-
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -94,11 +88,21 @@
     return cell;
 }
 
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = note.title;
+    cell.detailTextLabel. text = @"FOOOOBARRRRBAZQUX";
+}
+
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -132,20 +136,11 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
-        
-
     }
 }
 
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = note.title;
-}
-
 #pragma mark - Fetched results controller
-
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -263,11 +258,7 @@
 
 - (void)addNoteViewControllerDidSave
 {
-    NSError *error = nil;
-    NSManagedObjectContext *context = [[NoteStore sharedInstance]managedObjectContext];
-    if (![context save:&error]) {
-        NSLog(@"Error! %@", error);
-    }
+    [[NoteStore sharedInstance] saveContext];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
