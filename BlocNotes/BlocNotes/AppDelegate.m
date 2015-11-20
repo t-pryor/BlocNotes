@@ -21,28 +21,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // set *splitViewController to rootViewController
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    
-    // splitViewController.viewControllers contain 2 elements 0-master, 1-detail:
     UINavigationController *navigationControllerForDetailVC = [splitViewController.viewControllers lastObject];
-    
-    
     navigationControllerForDetailVC.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    
-    
-    // splitViewController must be set
     splitViewController.delegate = self;
     
     // Like Evernote, keep Master visible in iPad portrait mode
     splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
     // Initialize our Note Store
     [NoteStore sharedInstance];
-    
-    
-//    UITraitCollection *traitCollection = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
-//    
-//    navigationControllerForDetailVC setOverrideTraitCollection:traitCollection forChildViewController:<#(UIViewController *)#>
     
     return YES;
 }
@@ -68,9 +56,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   // Saves changes in the application's managed object context before the application terminates.
-
-    
-    // [self saveContext];
 
     [[NoteStore sharedInstance] saveContext];
 

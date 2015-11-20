@@ -34,19 +34,14 @@
     
     self.navigationItem.rightBarButtonItem = shareButton;
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
-    
-    if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        self.navigationItem.leftBarButtonItem = doneButton;
-
-    }
 }
+
+
 - (void)setupTitleText
 {
     self.detailTitleTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.detailTitleTextView.text = self.currentNote.title;
     self.detailTitleTextView.textColor = [UIColor blueColor];
-    
 }
 
 - (void)setupBodyText
@@ -63,7 +58,6 @@
     }
     
     self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
-    
 }
 
 
@@ -99,33 +93,12 @@
     
 }
 
-- (void)donePressed:(id)sender
-{
-    UITraitCollection *traitCollection_idiomPhone = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
-    
-    UITraitCollection *traitCollection_hCompact = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
-    UITraitCollection *traitCollection_vRegular = [UITraitCollection traitCollectionWithVerticalSizeClass:UIUserInterfaceSizeClassRegular];
-    
-    
-    NSArray *traitsArray = @[traitCollection_idiomPhone, traitCollection_hCompact, traitCollection_vRegular];
-    
-    UITraitCollection *traitCollection= [UITraitCollection traitCollectionWithTraitsFromCollections:traitsArray];
-    
-    [self.splitViewController setOverrideTraitCollection:traitCollection forChildViewController:self.splitViewController.viewControllers[0]];
-
-    NSLog(@"----------- %@", [self.splitViewController.viewControllers[0] traitCollection]);
-
-}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     // only commit edits if currentNote exists
     // currentNote won't exist after deleting note in master
     if (self.currentNote) [self saveEdits];
-    
-    UITraitCollection *traitCollection = [UITraitCollection traitCollectionWithUserInterfaceIdiom:UIUserInterfaceIdiomPhone];
-    
-    [self.navigationController.splitViewController setOverrideTraitCollection:traitCollection forChildViewController:self.splitViewController.viewControllers[0]];
     
 }
 
@@ -134,7 +107,6 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
 
 
 @end
