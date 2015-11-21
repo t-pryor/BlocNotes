@@ -140,6 +140,7 @@
 }
 
 
+
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -149,12 +150,10 @@
     }
   
     NSFetchRequest *fetchRequest = [[NoteStore sharedInstance] createInitialFetchRequest];
-                                    
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"masterVCCache"];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[NoteStore sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"masterVCCache"];
   
-    aFetchedResultsController.delegate = self;
-  
-    self.fetchedResultsController = aFetchedResultsController;
+    self.fetchedResultsController.delegate = self;
   
     NSError *error = nil;
   

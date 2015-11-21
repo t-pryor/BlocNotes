@@ -81,16 +81,9 @@
 
 - (void)sharePressed:(id)sender
 {
-    
     NSArray *objectsToShare = @[self.currentNote.title, self.currentNote.body];
-    
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
-    
     [self presentViewController:activityVC animated:YES completion:nil];
-    
-    UIPopoverPresentationController *pop = activityVC.popoverPresentationController;
-    pop.barButtonItem = sender;
-    
 }
 
 

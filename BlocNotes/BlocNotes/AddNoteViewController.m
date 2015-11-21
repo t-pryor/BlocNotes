@@ -70,8 +70,7 @@
 - (void)savePressed
 {
     if ([self.bodyText.text isEqualToString:@""]) {
-        self.bodyText.text = @"Tap to edit";
-    //    [NSThread sleepForTimeInterval:2.6];
+         self.bodyText.text = @"Tap to edit";
     }
     
     [self.currentNote setTitle:self.titleText.text];
@@ -89,10 +88,6 @@
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     
     [self presentViewController:activityVC animated:YES completion:nil];
-    
-    UIPopoverPresentationController *pop = activityVC.popoverPresentationController;
-    pop.barButtonItem = sender;
-    
 }
 
 

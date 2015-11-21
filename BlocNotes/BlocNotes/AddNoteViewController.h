@@ -20,8 +20,6 @@
 @property (nonatomic, weak) Note *currentNote;
 
 
-
-
 @property (weak, nonatomic) IBOutlet UITextView *titleText;
 
 
@@ -36,9 +34,10 @@
 
 
 /**
- The Master VC is the delegate and performs a model segue when the user wants to create a new note.
+ The Master VC is the delegate and performs a modal segue when the user wants to create a new note.
  */
 @property (nonatomic, weak) id <AddNoteViewControllerDelegate> delegate;
+
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 
@@ -57,7 +56,7 @@
 
 
 /**
- This protocol is instituted by the Master VC to handle when the user presses save and cance.
+ This protocol is instituted by the Master VC to handle when the user presses save and cance'.
  */
 @protocol AddNoteViewControllerDelegate
 
