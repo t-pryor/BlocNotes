@@ -81,7 +81,8 @@
 
 - (void)sharePressed:(id)sender
 {
-    NSArray *objectsToShare = @[self.currentNote.title, self.currentNote.body];
+    NSString *formattedNote = [NSString stringWithFormat:@"Note Title: %@ \nNote Body: %@", self.titleText.text, self.bodyText.text];
+    NSArray *objectsToShare = @[formattedNote];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     [self presentViewController:activityVC animated:YES completion:nil];
 }
