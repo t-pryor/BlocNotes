@@ -8,6 +8,7 @@
 
 #import "AddNoteViewController.h"
 #import "NoteStore.h"
+#import "ShareUtils.h"
 
 @interface AddNoteViewController ()
 
@@ -82,9 +83,7 @@
 
 - (void)sharePressed:(id)sender
 {
-    NSString *formattedNote = [NSString stringWithFormat:@"Note Title: %@ \nNote Body: %@", self.titleText.text, self.bodyText.text];
-    NSArray *objectsToShare = @[formattedNote];
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    UIActivityViewController *activityVC = [ShareUtils createActivityViewControllerWithTitle:self.titleText.text andBody:self.bodyText.text];
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
