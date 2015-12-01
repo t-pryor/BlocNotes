@@ -32,4 +32,6 @@
 
 - (Note *)createNoteWithTitle:(NSString *)title;
 
+- (NSURL *)applicationDocumentsDirectory;
+
 @end

@@ -51,6 +51,27 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+//    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc]initWithSuiteName: @"group.com.example.BlocNotes"];
+//    
+//    NSString *postTitle = [sharedDefaults objectForKey:@"postTitleKey"];
+//    
+//    if (postTitle != nil) {
+//        [[NoteStore sharedInstance] createNoteWithTitle: [sharedDefaults objectForKey:@"postTitleKey"]];
+//        [[NoteStore sharedInstance] saveContext];
+//        [sharedDefaults removeObjectForKey:@"postTitleKey"];
+//    }
+
+//    NSURL *containerURL = [[NoteStore sharedInstance] applicationDocumentsDirectory];
+//    NSMutableString *postTitle = [[NSMutableString alloc] initWithContentsOfURL:containerURL encoding:NSUTF8StringEncoding error:nil];
+//    
+//    if (postTitle != nil) {
+//        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
+//        [[NoteStore sharedInstance] saveContext];
+//    }
+    
+    NSLog(@"IN aapDidBecomeActive");
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -72,6 +93,11 @@
 // for iPhone 6 plus in portrait, default behavior is to expand to show detail view controller. We leave it as is.
 
 
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[NSFileManager defaultManager]
+            containerURLForSecurityApplicationGroupIdentifier:@"group.com.example.BlocNotes"];
+}
 
 
 
