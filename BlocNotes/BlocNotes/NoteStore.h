@@ -34,4 +34,6 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 
+- (NSString *)sharedResourceFilePath;
+
 @end

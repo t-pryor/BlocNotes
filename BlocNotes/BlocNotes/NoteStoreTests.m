@@ -136,5 +136,27 @@
     XCTAssertNotEqualObjects(testNoteY, testNoteZ);
 }
 
+- (void)testContainerURL
+{
+    // if this returns non-nil value then app group and entitlement settings are setup correctly
+    XCTAssertNotNil([[NoteStore sharedInstance] applicationDocumentsDirectory]);
+}
+
+
+- (void)testSharedResourceFilePathReturnedFromNoteStore
+{
+    XCTAssertNotNil([[NoteStore sharedInstance] sharedResourceFilePath]);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @end

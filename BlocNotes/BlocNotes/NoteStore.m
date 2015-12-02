@@ -246,6 +246,15 @@
     return [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.biz.blocnote"];
 }
 
+- (NSString *) sharedResourceFilePath
+{
+    NSString *dirPath = self.applicationDocumentsDirectory.path;
+    NSString *filePath = [dirPath stringByAppendingPathComponent: @"datafile.dat"];
+    
+    return filePath;
+}
+
+
 
 
 @end

@@ -52,26 +52,16 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-//    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc]initWithSuiteName: @"group.com.example.BlocNotes"];
-//    
-//    NSString *postTitle = [sharedDefaults objectForKey:@"postTitleKey"];
-//    
-//    if (postTitle != nil) {
-//        [[NoteStore sharedInstance] createNoteWithTitle: [sharedDefaults objectForKey:@"postTitleKey"]];
-//        [[NoteStore sharedInstance] saveContext];
-//        [sharedDefaults removeObjectForKey:@"postTitleKey"];
-//    }
-
-//    NSURL *containerURL = [[NoteStore sharedInstance] applicationDocumentsDirectory];
-//    NSMutableString *postTitle = [[NSMutableString alloc] initWithContentsOfURL:containerURL encoding:NSUTF8StringEncoding error:nil];
-//    
-//    if (postTitle != nil) {
-//        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
-//        [[NoteStore sharedInstance] saveContext];
-//    }
+    NSString *filePath = [[NoteStore sharedInstance] sharedResourceFilePath];
+    NSString *postTitle = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     
-    NSLog(@"IN aapDidBecomeActive");
+    if ([postTitle length] != 0) {
+        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
+        [[NoteStore sharedInstance] saveContext];
+    }
     
+    // write an empty string to the shared resource file
+    [[NSString string] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

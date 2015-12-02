@@ -36,38 +36,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-
-    
     [super viewDidAppear:animated];
- /*
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc]initWithSuiteName: @"group.com.example.BlocNotes"];
-    
-    NSString *postTitle = [sharedDefaults objectForKey:@"postTitleKey"];
-    
-    NSLog(@"mvm, view did appear, post title, shared defaults: %@", postTitle);
-    
-    if (postTitle != nil) {
-        
-        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
-        
-        [[NoteStore sharedInstance] saveContext];
-        [sharedDefaults removeObjectForKey:@"postTitleKey"];
-    }
-   
-  */
-    
- 
-//    NSURL *containerURL = [[NoteStore sharedInstance] applicationDocumentsDirectory];
-//    NSMutableString *postTitle = [[NSMutableString alloc] initWithContentsOfURL:containerURL encoding:NSUTF8StringEncoding error:nil];
-//    
-//    
-//    
-//    if (postTitle != nil) {
-//        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
-//        [[NoteStore sharedInstance] saveContext];
-//    }
-    
-    
 }
 
 
