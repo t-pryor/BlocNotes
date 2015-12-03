@@ -83,11 +83,6 @@
 // for iPhone 6 plus in portrait, default behavior is to expand to show detail view controller. We leave it as is.
 
 
-- (NSURL *)applicationDocumentsDirectory
-{
-    return [[NSFileManager defaultManager]
-            containerURLForSecurityApplicationGroupIdentifier:@"group.com.example.BlocNotes"];
-}
 
 
 

@@ -18,6 +18,7 @@
 		223AD3001B2F2C20003965FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223AD2FE1B2F2C20003965FA /* Main.storyboard */; };
 		223AD3021B2F2C20003965FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3011B2F2C20003965FA /* Images.xcassets */; };
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
+		229E39871C109BCD00098457 /* ShareViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 229E39861C109BCD00098457 /* ShareViewControllerTests.m */; };
 		22BEA6F31C065FB200EE225F /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEA6F21C065FB200EE225F /* ShareViewController.m */; };
 		22BEA6F51C065FB200EE225F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BEA6F41C065FB200EE225F /* MainInterface.storyboard */; };
 		22BEA6F81C065FB200EE225F /* BlocNotesShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22BEA6ED1C065FB200EE225F /* BlocNotesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -80,6 +81,7 @@
 		223AD3041B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		223AD30A1B2F2C20003965FA /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		229E39861C109BCD00098457 /* ShareViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewControllerTests.m; sourceTree = "<group>"; };
 		22BEA6ED1C065FB200EE225F /* BlocNotesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlocNotesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEA6F01C065FB200EE225F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22BEA6F11C065FB200EE225F /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				223581451B4D8E360096646D /* AddNoteViewControllerTests.m */,
 				22D4BFAB1B4EAC49007D4E03 /* DetailViewControllerTests.m */,
+				229E39861C109BCD00098457 /* ShareViewControllerTests.m */,
 			);
 			name = "Controller Tests";
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			files = (
 				223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
+				229E39871C109BCD00098457 /* ShareViewControllerTests.m in Sources */,
 				22D4BFAC1B4EAC49007D4E03 /* DetailViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

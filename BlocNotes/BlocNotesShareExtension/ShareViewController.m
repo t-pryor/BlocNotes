@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
+@import Foundation;
 #import "ShareViewController.h"
 #import "NoteStore.h"
+
+@import MobileCoreServices;
 
 #define kTitleCharacterLimit    (31)
 
@@ -15,6 +18,7 @@
 
 @property NSString *postToShare;
 @property UIDocumentInteractionController *documentInteractionController;
+@property NSString *urlString;
 
 @end
 
@@ -37,11 +41,26 @@
     } else {
         self.postToShare = self.contentText;
     }
+ 
+    NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
+    NSItemProvider *itemProvider = item.attachments.firstObject;
+    if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"]) {
+        [itemProvider loadItemForTypeIdentifier:@"public.url"
+                                        options:nil
+                              completionHandler:^(NSURL *url, NSError *error) {
+                                  self.urlString = url.absoluteString;
+                                  // send url to server to share the link
+                                  
+                                  [self.urlString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                                  // this needs to be put in the block (unlike in stub method Apple provides)
+                                  // If outside block, it dismisses the ShareVC and deallocates it
+                                  // So NSItemProvider is deallocated is destroyed before it can access the URL
+                                  [self.extensionContext completeRequestReturningItems:@[]
+                                                                     completionHandler:nil];
+                              }];
+    }
     
-    [self.postToShare writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
-    // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-    [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
 }
 
 - (NSArray *)configurationItems {

@@ -22,17 +22,24 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>NSExtensionActivationRule</key>
-			<string>TRUEPREDICATE</string>
-		</dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.share-services</string>
-	</dict>
+    <key>NSExtension</key>
+    <dict>
+        <key>NSExtensionAttributes</key>
+        <dict>
+            <key>NSExtensionActivationRule</key>
+            <dict>
+                <key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
+                <integer>1</integer>
+            </dict>
+            <key>NSExtensionPointName</key>
+            <string>com.apple.share-services</string>
+            <key>NSExtensionPointVersion</key>
+            <string>1.0</string>
+        </dict>
+        <key>NSExtensionPointIdentifier</key>
+        <string>com.apple.share-services</string>
+        <key>NSExtensionMainStoryboard</key>
+        <string>MainInterface</string>
+    </dict>
 </dict>
 </plist>
