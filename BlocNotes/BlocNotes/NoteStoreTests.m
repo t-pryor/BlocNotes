@@ -36,7 +36,7 @@
     testNote2 = [[NoteStore sharedInstance] createNote];
     
     testNote3 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote3 title"];
-    testNote4 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote4 title"];
+    testNote4 = [[NoteStore sharedInstance] createNoteWithTitle:@"testNote4 title" andURLString:@"www.example.com/ex1"];
     
     testStore0 = [[NoteStore alloc]init];
     testStore1 = [NoteStore sharedInstance];
@@ -81,6 +81,10 @@
     XCTAssertEqualObjects([testNote3 class], [Note class]);
 }
 
+- (void)testCreateNoteWithTitleAndURLStringCreatesNote
+{
+    XCTAssertEqualObjects([testNote4 class], [Note class]);
+}
 
 - (void)testAllNotesGetter
 {

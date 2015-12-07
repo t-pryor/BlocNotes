@@ -42,8 +42,10 @@
         self.postToShare = self.contentText;
     }
     
+    NSString *stringWithDivider = [self.postToShare stringByAppendingString:@"|"];
+    NSMutableString *mutableStringWithDivider = [stringWithDivider mutableCopy];
     
- 
+    
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
     if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"]) {
@@ -51,9 +53,11 @@
                                         options:nil
                               completionHandler:^(NSURL *url, NSError *error) {
                                   self.urlString = url.absoluteString;
-                                  // send url to server to share the link
                                   
-                                  [self.urlString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                                  [mutableStringWithDivider appendString:self.urlString];
+                                  
+                                  // send url to server to share the link
+                                  [mutableStringWithDivider writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                                   // this needs to be put in the block (unlike in stub method Apple provides)
                                   // If outside block, it dismisses the ShareVC and deallocates it
                                   // So NSItemProvider is deallocated is destroyed before it can access the URL

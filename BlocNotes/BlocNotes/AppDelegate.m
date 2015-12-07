@@ -53,10 +53,18 @@
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     NSString *filePath = [[NoteStore sharedInstance] sharedResourceFilePath];
-    NSString *postTitle = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *stringFromFile = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     
-    if ([postTitle length] != 0) {
-        [[NoteStore sharedInstance] createNoteWithTitle: postTitle];
+    NSArray *bits = [stringFromFile componentsSeparatedByString:@"|"];
+    
+    NSString *postTitleFromFile = [bits objectAtIndex:0];
+    NSString *urlFromFile = [bits objectAtIndex:1];
+    
+    
+    if ([stringFromFile length] != 0) {
+        //[[NoteStore sharedInstance] createNoteWithTitle: postTitleFromFile];
+        [[NoteStore sharedInstance] createNoteWithTitle: urlFromFile];
+        
         [[NoteStore sharedInstance] saveContext];
     }
     

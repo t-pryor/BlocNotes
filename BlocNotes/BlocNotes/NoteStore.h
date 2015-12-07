@@ -32,6 +32,8 @@
 
 - (Note *)createNoteWithTitle:(NSString *)title;
 
+- (Note *)createNoteWithTitle:(NSString *)title andURLString:(NSString *)urlString;
+
 - (NSURL *)applicationDocumentsDirectory;
 
 - (NSString *)sharedResourceFilePath;

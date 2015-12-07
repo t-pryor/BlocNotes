@@ -91,6 +91,7 @@
     
     note.dateCreated = [NSDate date];
     note.dateModified = note.dateCreated;
+    note.urlString = nil;
     
     dispatch_barrier_async(self.concurrentNoteQueue, ^{
         [self.privateNotes addObject:note];
@@ -109,6 +110,7 @@
     note.title = title;
     note.dateCreated = [NSDate date];
     note.dateModified = note.dateCreated;
+    note.urlString = nil;
     
     dispatch_barrier_async(self.concurrentNoteQueue, ^{
         [self.privateNotes addObject:note];
@@ -117,6 +119,20 @@
     return note;
 }
 
+
+-(Note *)createNoteWithTitle:(NSString *)title andURLString:(NSString *)urlString
+{
+    Note *note = (Note *)[NSEntityDescription
+                          insertNewObjectForEntityForName:@"Note"
+                          inManagedObjectContext:self.managedObjectContext];
+    
+    note.title = title;
+    note.dateCreated = [NSDate date];
+    note.dateModified = note.dateCreated;
+    note.urlString = urlString;
+    
+    return note;
+}
 
 - (void)deleteNote:(Note *)note
 {
