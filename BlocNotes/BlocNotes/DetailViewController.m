@@ -28,8 +28,6 @@
     // set to NO on view controller to turn off behavior
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
-    
     NSURL *url = [NSURL URLWithString:self.currentNote.urlString];
     
     [self setupTitleText];
@@ -40,7 +38,10 @@
         [self setupBodyText];
     }
     
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sharePressed:)];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc]
+                                    initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                    target:self
+                                    action:@selector(sharePressed:)];
     
     self.navigationItem.rightBarButtonItem = shareButton;
     
@@ -49,9 +50,10 @@
 
 - (void)setupTitleText
 {
+    self.detailTitleTextView.textColor = [UIColor blueColor];
     self.detailTitleTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.detailTitleTextView.text = self.currentNote.title;
-    self.detailTitleTextView.textColor = [UIColor blueColor];
+    
 }
 
 
@@ -72,7 +74,12 @@
     self.detailWebView.hidden = YES;
     self.detailBodyTextView.hidden = NO;
     self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
-    self.detailBodyTextView.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    
+    self.detailBodyTextView.textColor = [UIColor blackColor];
+    self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.detailBodyTextView.text = self.currentNote.body;
+    
+    //@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 }
 
@@ -85,7 +92,6 @@
     NSURL *url = [[NSURL alloc] initWithString:self.currentNote.urlString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [self.detailWebView loadRequest:request];
-   // self.detailWebView.scalesPageToFit = YES;
     [self.detailWebView.scrollView setShowsHorizontalScrollIndicator:NO];
     self.detailWebView.opaque = NO;
 
