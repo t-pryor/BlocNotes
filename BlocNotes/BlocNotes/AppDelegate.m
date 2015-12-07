@@ -55,16 +55,13 @@
     NSString *filePath = [[NoteStore sharedInstance] sharedResourceFilePath];
     NSString *stringFromFile = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     
-    NSArray *bits = [stringFromFile componentsSeparatedByString:@"|"];
-    
-    NSString *postTitleFromFile = [bits objectAtIndex:0];
-    NSString *urlFromFile = [bits objectAtIndex:1];
-    
-    
     if ([stringFromFile length] != 0) {
-        //[[NoteStore sharedInstance] createNoteWithTitle: postTitleFromFile];
-        [[NoteStore sharedInstance] createNoteWithTitle: urlFromFile];
-        
+        NSArray *stringArray = [stringFromFile componentsSeparatedByString:@"|"];
+    
+        NSString *postTitleFromFile = [stringArray objectAtIndex:0];
+        NSString *urlStringFromFile = [stringArray objectAtIndex:1];
+
+        [[NoteStore sharedInstance] createNoteWithTitle:postTitleFromFile andURLString:urlStringFromFile];
         [[NoteStore sharedInstance] saveContext];
     }
     

@@ -12,7 +12,7 @@
 
 @import MobileCoreServices;
 
-#define kTitleCharacterLimit    (31)
+#define kTitleCharacterLimit    (90)
 
 @interface ShareViewController ()
 
@@ -42,9 +42,7 @@
         self.postToShare = self.contentText;
     }
     
-    NSString *stringWithDivider = [self.postToShare stringByAppendingString:@"|"];
-    NSMutableString *mutableStringWithDivider = [stringWithDivider mutableCopy];
-    
+    NSMutableString *mutableStringWithDivider = [[self.postToShare stringByAppendingString:@"|"] mutableCopy];
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;

@@ -28,7 +28,9 @@
     // set to NO on view controller to turn off behavior
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    NSURL *url = [NSURL URLWithString:self.currentNote.title];
+    
+    
+    NSURL *url = [NSURL URLWithString:self.currentNote.urlString];
     
     [self setupTitleText];
     
@@ -80,7 +82,7 @@
     self.detailBodyTextView.hidden = YES;
     
     self.detailWebView.delegate = self;
-    NSURL *url = [[NSURL alloc] initWithString:self.currentNote.title];
+    NSURL *url = [[NSURL alloc] initWithString:self.currentNote.urlString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [self.detailWebView loadRequest:request];
    // self.detailWebView.scalesPageToFit = YES;
