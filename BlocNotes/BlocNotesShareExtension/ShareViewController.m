@@ -41,6 +41,8 @@
     } else {
         self.postToShare = self.contentText;
     }
+    
+    
  
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -59,6 +61,8 @@
                                                                      completionHandler:nil];
                               }];
     }
+    
+    
     
     
 }

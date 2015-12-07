@@ -100,7 +100,7 @@
 {
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = note.title;
-    cell.detailTextLabel. text = @"FOOOOBARRRRBAZQUX";
+    cell.detailTextLabel. text = @"FOOOOBARRRRBAZQUX"; //&*
 }
 
 

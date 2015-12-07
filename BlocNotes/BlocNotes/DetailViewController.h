@@ -10,7 +10,7 @@
 #import "AddNoteViewController.h"
 #import "Note.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UIWebViewDelegate>
 
 // not used except in app delegate
 @property (strong, nonatomic) id detailItem;
@@ -35,6 +35,9 @@
  */
 //@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
 @property (weak, nonatomic) IBOutlet UITextView *detailBodyTextView;
+
+
+@property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
 
 
 /**

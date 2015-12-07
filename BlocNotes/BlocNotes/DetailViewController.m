@@ -28,8 +28,15 @@
     // set to NO on view controller to turn off behavior
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    NSURL *url = [NSURL URLWithString:self.currentNote.title];
+    
     [self setupTitleText];
-    [self setupBodyText];
+    
+    if (url && url.scheme && url.host) {
+        [self setupWebView];
+    } else {
+        [self setupBodyText];
+    }
     
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sharePressed:)];
     
@@ -45,20 +52,68 @@
     self.detailTitleTextView.textColor = [UIColor blueColor];
 }
 
+
+
 - (void)setupBodyText
 {
-    self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.detailBodyTextView.text = self.currentNote.body;
-
-    // like Evernote, if user did not enter text during
-    // initial note creation, show placeholder text in light gray
-    if ([self.detailBodyTextView.text isEqualToString:@"Tap to edit"]) {
-        self.detailBodyTextView.textColor = [UIColor lightGrayColor];
-    } else {
-        self.detailBodyTextView.textColor = [UIColor blackColor];
-    }
-    
+//    self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+//    self.detailBodyTextView.text = self.currentNote.title;
+//
+//    // like Evernote, if user did not enter text during
+//    // initial note creation, show placeholder text in light gray
+//    if ([self.detailBodyTextView.text isEqualToString:@"Tap to edit"]) {
+//        self.detailBodyTextView.textColor = [UIColor lightGrayColor];
+//    } else {
+//        self.detailBodyTextView.textColor = [UIColor blackColor];
+//    }
+//
+    self.detailWebView.hidden = YES;
+    self.detailBodyTextView.hidden = NO;
     self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
+    self.detailBodyTextView.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+}
+
+- (void)setupWebView
+{
+    self.detailWebView.hidden = NO;
+    self.detailBodyTextView.hidden = YES;
+    
+    self.detailWebView.delegate = self;
+    NSURL *url = [[NSURL alloc] initWithString:self.currentNote.title];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [self.detailWebView loadRequest:request];
+   // self.detailWebView.scalesPageToFit = YES;
+    [self.detailWebView.scrollView setShowsHorizontalScrollIndicator:NO];
+    self.detailWebView.opaque = NO;
+
+
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+   
+    //[webView.scrollView setContentSize: CGSizeMake((webView.frame.size.width-20), webView.scrollView.contentSize.height)];
+
+    
+    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = webView.bounds.size;
+    
+    float rw = viewSize.width / contentSize.width;
+    
+    webView.scrollView.minimumZoomScale = rw;
+    webView.scrollView.maximumZoomScale = rw;
+    webView.scrollView.zoomScale = rw;
+   
+    
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x > 0)
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+    if (scrollView.contentOffset.x < 0)
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
 }
 
 
@@ -103,3 +158,4 @@
 
 
 @end
+
