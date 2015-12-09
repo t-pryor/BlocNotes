@@ -60,17 +60,6 @@
 
 - (void)setupBodyText
 {
-//    self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-//    self.detailBodyTextView.text = self.currentNote.title;
-//
-//    // like Evernote, if user did not enter text during
-//    // initial note creation, show placeholder text in light gray
-//    if ([self.detailBodyTextView.text isEqualToString:@"Tap to edit"]) {
-//        self.detailBodyTextView.textColor = [UIColor lightGrayColor];
-//    } else {
-//        self.detailBodyTextView.textColor = [UIColor blackColor];
-//    }
-//
     self.detailWebView.hidden = YES;
     self.detailBodyTextView.hidden = NO;
     self.detailBodyTextView.textAlignment = NSTextAlignmentLeft;
@@ -78,9 +67,6 @@
     self.detailBodyTextView.textColor = [UIColor blackColor];
     self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     self.detailBodyTextView.text = self.currentNote.body;
-    
-    //@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
 }
 
 - (void)setupWebView
@@ -103,7 +89,6 @@
    
     //[webView.scrollView setContentSize: CGSizeMake((webView.frame.size.width-20), webView.scrollView.contentSize.height)];
 
-    
     CGSize contentSize = webView.scrollView.contentSize;
     CGSize viewSize = webView.bounds.size;
     

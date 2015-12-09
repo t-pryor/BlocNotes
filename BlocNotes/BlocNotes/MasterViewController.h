@@ -12,7 +12,7 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate>
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 
 /**
@@ -22,6 +22,7 @@
  The managed object context was also moved to the NoteStore and this is accessed through its getter method.
  */
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
 
 
 @end 
