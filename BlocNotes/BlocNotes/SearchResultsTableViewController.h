@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class SearchResultsTableViewController;
+
+@protocol SearchResultsTableViewControllerDelegate <NSObject>
+
+- (void)searchResultsTableViewControllerDone:(SearchResultsTableViewController *)srtvc;
+
+@end
+
 @interface SearchResultsTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *searchResults;
+
+@property (weak, nonatomic) NSObject <SearchResultsTableViewControllerDelegate> *delegate;
 
 @end

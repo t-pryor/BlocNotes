@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "AddNoteViewController.h"
+#import "SearchResultsTableViewController.h"
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate, SearchResultsTableViewControllerDelegate>
 
 
 /**

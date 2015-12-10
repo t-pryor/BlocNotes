@@ -8,8 +8,12 @@
 
 #import "SearchResultsTableViewController.h"
 #import "Note.h"
+#import "DetailViewController.h"
 
 @interface SearchResultsTableViewController ()
+
+@property (strong, nonatomic) Note *selectedNote;
+@property (strong, nonatomic) NSIndexPath *path;
 
 @end
 
@@ -25,10 +29,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
@@ -36,6 +42,7 @@
 
     return 1;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
@@ -50,6 +57,34 @@
     cell.textLabel.text = note.title;
     return cell;
 }
+
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    self.selectedNote = self.searchResults[indexPath.row];
+    return indexPath;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"showSearchedNote"]) {
+        
+        UINavigationController *nav = [segue destinationViewController];
+        DetailViewController *dvc = (DetailViewController *)nav.topViewController;
+    
+        dvc.currentNote = self.selectedNote;
+        dvc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(donePressed) ] ;
+        dvc.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+}
+
+
+- (void)donePressed
+{
+    [self.delegate searchResultsTableViewControllerDone:self];
+}
+
+
 
 
 /*
