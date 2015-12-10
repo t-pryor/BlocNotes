@@ -38,4 +38,6 @@
 
 - (NSString *)sharedResourceFilePath;
 
+- (NSArray *)searchResultsUsingPredicate:(NSPredicate *)predicate;
+
 @end

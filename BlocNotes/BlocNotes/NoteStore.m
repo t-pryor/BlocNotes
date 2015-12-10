@@ -160,6 +160,27 @@
     return fetchRequest;
 }
 
+- (NSArray *)searchResultsUsingPredicate:(NSPredicate *)predicate
+{
+    //function should return an array back to filteredList in MasterVC
+    
+    NSArray *searchResults;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error;
+    searchResults = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return searchResults;
+}
+
+
+
+
+
 
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes
 {

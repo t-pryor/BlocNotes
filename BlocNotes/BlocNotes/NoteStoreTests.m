@@ -152,6 +152,43 @@
     XCTAssertNotNil([[NoteStore sharedInstance] sharedResourceFilePath]);
 }
 
+- (void)testSearchResultReturnedFromNoteStore
+{
+    
+    [[NoteStore sharedInstance] createNoteWithTitle:@"FooBar"];
+
+    
+    NSArray *testArray;
+    NSArray *testArray2;
+    
+    NSString *pString = @"title contains[cd] $A";
+    NSPredicate *p = [NSPredicate predicateWithFormat:pString];
+    NSDictionary *sub = [NSDictionary dictionaryWithObject:@"testNote" forKey:@"A"];
+    p = [p predicateWithSubstitutionVariables:sub];
+    
+    testArray = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
+    
+    for (Note *note in testArray) {
+        XCTAssert([note.title containsString:@"testNote"]);
+        XCTAssertFalse([note.title containsString:@"FooBar"]);
+    }
+    
+    
+    
+    NSPredicate *p2 = [NSPredicate predicateWithFormat:pString];
+    NSDictionary *sub2 = [NSDictionary dictionaryWithObject:@"FooBar" forKey:@"A"];
+    p2 = [p2 predicateWithSubstitutionVariables:sub2];
+    
+    testArray2 = [[NoteStore sharedInstance] searchResultsUsingPredicate:p2];
+
+    for (Note *note in testArray2) {
+        XCTAssertFalse([note.title containsString:@"testNote"]);
+        XCTAssert([note.title containsString:@"FooBar"]);
+    }
+    
+}
+
+
 
 
 

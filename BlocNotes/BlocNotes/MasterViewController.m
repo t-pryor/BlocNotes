@@ -84,11 +84,27 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-    
+        
+        /*
+         if ([self.searchController isActive]) {
+         //NSIndexPath *indexPath = [self.filteredList indexPathForSelectedRow];
+         //Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
+         
+         UITableViewCell *currentCell = [[UITableViewCell alloc] init];
+         currentCell = (UITableViewCell *)sender;
+         
+         NSString *noteTitle = currentCell.textLabel.text;
+         
+         NSFetchRequest *request =
+         
+         Note *currentNote = (Note *)[[self fetchedResultsController] fe]
+         
+        } */
+        
         UINavigationController *nav = [segue destinationViewController];
         DetailViewController *dvc = (DetailViewController *)nav.topViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-   
+        
         Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
         dvc.currentNote = currentNote;
         dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -98,7 +114,7 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     if ([[segue identifier] isEqualToString:@"addNote"]) {
         AddNoteViewController *anvc = (AddNoteViewController *)[segue destinationViewController];
         anvc.delegate = self;
-
+        
         Note *newNote = [[NoteStore sharedInstance] createNoteWithTitle:@""];
         anvc.currentNote = newNote;
     }
@@ -353,7 +369,6 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 
 - (void)searchForText:(NSString *)searchText scope:(NoteSearchScope)scopeOption
 {
-   
     NSString *predString;
     
     if (scopeOption == searchScopeTitle) {
@@ -368,13 +383,9 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     NSDictionary *sub = [NSDictionary dictionaryWithObject:searchText forKey:@"A"];
     p = [p predicateWithSubstitutionVariables:sub];
     
-    [self.searchFetchRequest setPredicate:p];
     
     NSError *error = nil;
-    self.filteredList = [[[NoteStore sharedInstance] managedObjectContext]
-                         executeFetchRequest:self.searchFetchRequest
-                         error:&error];
-    
+    self.filteredList = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
 }
 
 
