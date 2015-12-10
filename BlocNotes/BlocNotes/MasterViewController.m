@@ -85,27 +85,31 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
-        /*
-         if ([self.searchController isActive]) {
-         //NSIndexPath *indexPath = [self.filteredList indexPathForSelectedRow];
-         //Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
-         
-         UITableViewCell *currentCell = [[UITableViewCell alloc] init];
-         currentCell = (UITableViewCell *)sender;
-         
-         NSString *noteTitle = currentCell.textLabel.text;
-         
-         NSFetchRequest *request =
-         
-         Note *currentNote = (Note *)[[self fetchedResultsController] fe]
-         
-        } */
-        
+        Note *currentNote;
         UINavigationController *nav = [segue destinationViewController];
         DetailViewController *dvc = (DetailViewController *)nav.topViewController;
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+       
+        if ([self.searchController isActive]) {
+            
+            UITableViewCell *currentCell = [[UITableViewCell alloc] init];
+            currentCell = (UITableViewCell *)sender;
+            NSString *noteTitle = currentCell.textLabel.text;
+            
+            NSString *predicateString = [NSString stringWithFormat:@"title contains[cd] $A"];
+            NSPredicate *p = [NSPredicate predicateWithFormat:predicateString];
+            NSDictionary *sub = [NSDictionary dictionaryWithObject:noteTitle forKey:@"A"];
+            p = [p predicateWithSubstitutionVariables:sub];
+            
+            NSArray *noteArray = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
+            currentNote = (Note *)[noteArray firstObject];
+            
+        } else {
         
-        Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
+        
+        }
+        
         dvc.currentNote = currentNote;
         dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         dvc.navigationItem.leftItemsSupplementBackButton = YES;
