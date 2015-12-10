@@ -13,7 +13,7 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate, SearchResultsTableViewControllerDelegate>
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 
 /**

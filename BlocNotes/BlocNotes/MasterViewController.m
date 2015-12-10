@@ -18,7 +18,6 @@
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
 @property (strong, nonatomic) NSArray *filteredList;
-@property (strong, nonatomic) SearchResultsTableViewController *srtvc;
 
 
 typedef NS_ENUM(NSInteger, NoteSearchScope)
@@ -49,32 +48,6 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     [super viewDidLoad];
     
     self.title = @"All Notes";
-   
-    UINavigationController *searchResultsController =
-        [[self storyboard]
-         instantiateViewControllerWithIdentifier:@"TableSearchResultsNavController"];
-    
-    self.searchController = [[UISearchController alloc]
-                             initWithSearchResultsController:searchResultsController];
-   
-    self.searchController.searchResultsUpdater = self;
-
-    // is underlying content dimmed during search?
-    self.searchController.dimsBackgroundDuringPresentation = YES;
-    // array of strings indicating the titles of the scope button
-    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"In Title", @"Title"),
-                                                          NSLocalizedString(@"In Note", @"Body"),
-                                                          NSLocalizedString(@"In Either", @"Either")];
-    self.searchController.searchBar.delegate = self;
-    
-    // tableHeaderView = accessory view displayed above the table
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    
-    
-    
-    /*
-
-    
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -86,9 +59,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"In Title", @"Title"),
                                                           NSLocalizedString(@"In Note", @"Body"),
                                                           NSLocalizedString(@"In Either", @"Either")];
-    self.searchController.searchBar.delegate = self;
     
-    */
+    self.searchController.searchBar.delegate = self;
     
     self.definesPresentationContext = YES;
 }
@@ -111,31 +83,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    
-    
-    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        /*
-        if ([self.searchController isActive]) {
-            //NSIndexPath *indexPath = [self.filteredList indexPathForSelectedRow];
-            //Note *currentNote = (Note *)[[self fetchedResultsController] objectAtIndexPath: indexPath];
-            
-            UITableViewCell *currentCell = [[UITableViewCell alloc] init];
-            currentCell = (UITableViewCell *)sender;
-            
-            NSString *noteTitle = currentCell.textLabel.text;
-            
-            NSFetchRequest *request =
-            
-            Note *currentNote = (Note *)[[self fetchedResultsController] fe]
-            
-
-        }
-        
-        */
-        
-        
-        
+    
         UINavigationController *nav = [segue destinationViewController];
         DetailViewController *dvc = (DetailViewController *)nav.topViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -170,14 +119,6 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    /*
-    if (tableView == self.tableView) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-        return [sectionInfo numberOfObjects];
-    } else {
-        return [self.filteredList count];
-    }*/
-    
     if ([self.searchController isActive]) {
         return [self.filteredList count];
     } else {
@@ -189,24 +130,13 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /* srtvc
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
-     */
-    //static int count = 0;
     
     Note *note = nil;
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
     
-   // if (self.searchController.active && ([self.filteredList count] > 0)) {
     if (self.searchController.active && ([self.filteredList count] > 0)) {
         
         note = [self.filteredList objectAtIndex:indexPath.row];
-       // count++;
-       // NSLog(@"count:   %i", count);
     
     } else {
         note = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -411,27 +341,13 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     
-    
-    NSString *searchString = self.searchController.searchBar.text;
-    [self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    
-    if (self.searchController.searchResultsController) {
-        UINavigationController *navController = (UINavigationController *)self.searchController.searchResultsController;
-        SearchResultsTableViewController *srtvc = (SearchResultsTableViewController *)navController.topViewController;
-        srtvc.searchResults = [self.filteredList mutableCopy];
-        srtvc.delegate = self;
-        [srtvc.tableView reloadData];
-    }
-    
-    /*
     NSString *searchString = self.searchController.searchBar.text;
     [self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
     
     //NSString *searchString = searchController.searchBar.text;
     //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
     [self.tableView reloadData];
-    
-    */
+
 }
 
 
@@ -460,31 +376,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
                          error:&error];
     
 }
-/*
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-{
-    if (!self.searchController.active)
-    {
-        if (index > 0)
-        {
-            // The index is offset by one to allow for the extra search icon inserted at the front
-            // of the index
-            
-            return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index-1];
-        }
-        else
-        {
-            // The first entry in the index is for the search icon so we return section not found
-            // and force the table to scroll to the top.
-            
-            CGRect searchBarFrame = self.searchController.searchBar.frame;
-            [self.tableView scrollRectToVisible:searchBarFrame animated:NO];
-            return NSNotFound;
-        }
-    }
-    return 0;
-}
-*/
+
+
 #pragma mark -UISearchBarDelegate
 
 -(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
@@ -492,9 +385,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     [self updateSearchResultsForSearchController:self.searchController];
 }
 
--(void)searchResultsTableViewControllerDone:(SearchResultsTableViewController *)srtvc
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
+
 
 @end

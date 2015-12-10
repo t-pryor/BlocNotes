@@ -206,52 +206,6 @@
             </objects>
             <point key="canvasLocation" x="1508" y="-630"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="IQs-8e-uBo">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YFy-PP-fDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="epG-wW-aI9" customClass="SearchResultsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LP7-ha-IRZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="414-eq-tYI">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="414-eq-tYI" id="yws-dN-e86">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showSearchedNote" id="ik4-CE-IeA"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="epG-wW-aI9" id="Heo-aI-uvA"/>
-                            <outlet property="delegate" destination="epG-wW-aI9" id="K1X-OA-soB"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="tJu-bf-CE9"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="788" y="-1349"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="TLm-cS-OEY">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sXf-If-Khx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="TableSearchResultsNavController" id="jFD-kU-78D" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TXn-sF-yNT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="epG-wW-aI9" kind="relationship" relationship="rootViewController" id="ei4-pY-z3O"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="32" y="-1443"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
             <objects>
@@ -269,6 +223,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ik4-CE-IeA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>
