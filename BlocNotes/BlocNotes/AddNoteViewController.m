@@ -79,7 +79,17 @@
 - (void)savePressed
 {
     if ([self.titleText.text isEqualToString: @"Tap here to edit title"]) {
-        [self.currentNote setTitle:@"Untitled Note"];
+        
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"title contains 'Untitled'"];
+        NSArray *untitledNotes = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
+        
+        if ([untitledNotes count] > 0) {
+            NSUInteger numberOfUntitledNotes = [untitledNotes count] + 1;
+            [self.currentNote setTitle:[NSString stringWithFormat:@"Untitled Note (%lu)", (unsigned long)numberOfUntitledNotes]];
+        } else {
+            [self.currentNote setTitle:@"Untitled Note"];
+        }
+        
     } else {
         [self.currentNote setTitle:self.titleText.text];
     }
