@@ -113,6 +113,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
         dvc.currentNote = currentNote;
         dvc.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         dvc.navigationItem.leftItemsSupplementBackButton = YES;
+        
+        dvc.detailBodyTextViewIsEditable = NO;
     }
     
     if ([[segue identifier] isEqualToString:@"addNote"]) {

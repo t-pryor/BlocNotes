@@ -10,7 +10,7 @@
 #import "AddNoteViewController.h"
 #import "Note.h"
 
-@interface DetailViewController : UIViewController <UIWebViewDelegate>
+@interface DetailViewController : UIViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 
 // not used except in app delegate
 @property (strong, nonatomic) id detailItem;
@@ -40,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
 
 
+@property BOOL detailBodyTextViewIsEditable;
+
 /**
  Saves the changes (if any) to Note information/
  
@@ -47,6 +49,8 @@
  or when the user clicks on the back button on iPhone.
  */
 - (void)saveEdits;
+
+
 
 
 
