@@ -80,8 +80,7 @@
     return [documentDirectory stringByAppendingPathComponent:@"store.data"];
 }
 
-
-/* SHOULD WE HAVE ONLY ONE WAY TO CREATE NOTE??? */
+#warning eliminate unecessary methods to create notes
 
 - (Note *)createNote
 {
@@ -134,6 +133,7 @@
     return note;
 }
 
+
 - (void)deleteNote:(Note *)note
 {
     [self.managedObjectContext deleteObject:note];
@@ -160,6 +160,7 @@
     return fetchRequest;
 }
 
+
 - (NSArray *)searchResultsUsingPredicate:(NSPredicate *)predicate
 {
     //function should return an array back to filteredList in MasterVC
@@ -178,10 +179,6 @@
 }
 
 
-
-
-
-
 - (void)loadNotesFromInitialFetchIntoStore:(NSArray *)notes
 {
     __block NSMutableArray *array;
@@ -194,7 +191,6 @@
 }
 
 
-
 #pragma mark - Core Data stack
 
 
@@ -203,6 +199,7 @@
 //@synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 
 - (NSManagedObjectModel *)managedObjectModel {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
@@ -260,7 +257,6 @@
 }
 
 
-
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
@@ -276,12 +272,14 @@
     }
 }
 
+
 #pragma mark - App Extension Sharing
 
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.biz.blocnote"];
 }
+
 
 - (NSString *) sharedResourceFilePath
 {
@@ -290,8 +288,5 @@
     
     return filePath;
 }
-
-
-
 
 @end

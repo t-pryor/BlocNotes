@@ -389,8 +389,6 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     NSDictionary *sub = [NSDictionary dictionaryWithObject:searchText forKey:@"A"];
     p = [p predicateWithSubstitutionVariables:sub];
     
-    
-    NSError *error = nil;
     self.filteredList = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
 }
 

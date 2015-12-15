@@ -12,62 +12,10 @@
 
 @interface DetailViewController ()
 
-//@property (strong, nonatomic) UITapGestureRecognizer *doubleTapRecognizer;
-//@property (strong, nonatomic) UILongPressGestureRecognizer *longPressGestureRecognizer;
-
 @end
 
 @implementation DetailViewController
 
-static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(UIDataDetectorTypes dataDetectorType) {
-    NSTextCheckingType textCheckingType = 0;
-    if (dataDetectorType & UIDataDetectorTypeAddress) {
-        textCheckingType |= NSTextCheckingTypeAddress;
-    }
-    
-    if (dataDetectorType & UIDataDetectorTypeCalendarEvent) {
-        textCheckingType |= NSTextCheckingTypeDate;
-    }
-    
-    if (dataDetectorType & UIDataDetectorTypeLink) {
-        textCheckingType |= NSTextCheckingTypeLink;
-    }
-    
-    if (dataDetectorType & UIDataDetectorTypePhoneNumber) {
-        textCheckingType |= NSTextCheckingTypePhoneNumber;
-    }
-    
-    return textCheckingType;
-}
-
-- (void)checkForLinksWithString:(NSString *)textToCheck
-{
-    NSError *error = nil;
-    NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeAddress | NSTextCheckingTypePhoneNumber error:&error];
-    
-    NSString *string = @"987 Main St. foobar is the best (555) 555-1234 peter piper picked a pickle";
-    
-    __block NSMutableArray *results = [NSMutableArray array];
-    
-    [detector enumerateMatchesInString:string
-                               options:kNilOptions
-                                 range:NSMakeRange(0, [string length])
-                            usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-                                NSLog(@"Match %@", result);
-                                [results addObject:result];
-                            }];
-    
-    for (NSTextCheckingResult *result in results) {
-        
-        if (result.resultType == NSTextCheckingTypePhoneNumber) {
-            NSLog(@"matched phone: %@ at position ", result.phoneNumber);
-        }
-        if (result.resultType == NSTextCheckingTypeAddress) {
-            NSLog(@"matched address: %@ at position ", result.addressComponents);
-        }
-        
-    }
-}
 
 #pragma mark - Managing the detail item
 
@@ -98,7 +46,6 @@ static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(U
     
     self.navigationItem.rightBarButtonItem = shareButton;
     
-    [self checkForLinksWithString:@"foobar"];
 }
 
 
@@ -134,14 +81,6 @@ static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(U
     self.detailBodyTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     self.detailBodyTextView.text = self.currentNote.body;
     
-    
-    
-    
-//    NSError *error = nil;
-    
-//    if (!self.detailBodyTextViewIsEditable) {
-//        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber | NSTextCheckingTypeLink | NSTextCheckingType error:&error]
-//    }
 }
 
 - (void)addGestureRecognizersToTextView
@@ -152,11 +91,6 @@ static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(U
     textViewDoubleTapRecognizer.delegate = self;
     textViewDoubleTapRecognizer.numberOfTapsRequired = 2;
     [self.detailBodyTextView addGestureRecognizer:textViewDoubleTapRecognizer];
-    
-    UILongPressGestureRecognizer * textViewLongPressRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(textViewLongPressFired:)];
-    [self.detailBodyTextView addGestureRecognizer:textViewLongPressRecognizer];
-
-    
 }
 
 - (void)setupWebView
@@ -185,8 +119,6 @@ static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(U
     webView.scrollView.minimumZoomScale = rw;
     webView.scrollView.maximumZoomScale = rw;
     webView.scrollView.zoomScale = rw;
-   
-    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -245,33 +177,17 @@ static inline NSTextCheckingType NSTextCheckingCheckingFromUIDataDetectorTypes(U
     self.detailBodyTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     [self addGestureRecognizersToTextView];
     
-   // [self setupDetailBodyTextView];
 }
 
 
 - (void)textViewDoubleTapFired:(UITapGestureRecognizer *)gr
 {
-    NSLog(@"doubleTapFired: ");
-    
     [self.detailTitleTextView resignFirstResponder];
     self.detailBodyTextView.dataDetectorTypes = UIDataDetectorTypeNone;
     self.detailBodyTextView.editable = YES;
     [self.detailBodyTextView becomeFirstResponder];
-    
 }
 
--(void)textViewLongPressFired:(UILongPressGestureRecognizer *)lpgr
-{
-    NSLog(@"longPress fired: ");
-    
-}
-
-
-//-(void)textViewDidEndEditing:(UITextView *)textView
-//{
-//    self.detailBodyTextView.editable = NO;
-//    self.detailBodyTextView.dataDetectorTypes = UIDataDetectorTypeAll;
-//}
 
 @end
 
