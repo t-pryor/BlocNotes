@@ -32,6 +32,10 @@
     // Initialize our Note Store
     [NoteStore sharedInstance];
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    id currentiCloudToken = fileManager.ubiquityIdentityToken;
+    
+    
     return YES;
 }
 
