@@ -11,6 +11,7 @@
 #import "AddNoteViewController.h"
 #import "SearchResultsTableViewController.h"
 
+
 @class DetailViewController;
 
 @interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>

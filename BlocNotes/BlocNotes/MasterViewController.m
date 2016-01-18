@@ -12,7 +12,6 @@
 #import "Note.h"
 #import "SearchResultsTableViewController.h"
 
-
 @interface MasterViewController ()
 
 @property (strong, nonatomic) UISearchController *searchController;

@@ -18,15 +18,18 @@
 		223AD3001B2F2C20003965FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223AD2FE1B2F2C20003965FA /* Main.storyboard */; };
 		223AD3021B2F2C20003965FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3011B2F2C20003965FA /* Images.xcassets */; };
 		223AD3051B2F2C20003965FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223AD3031B2F2C20003965FA /* LaunchScreen.xib */; };
+		226E522C1C495C3200653358 /* ICloudSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E522B1C495C3200653358 /* ICloudSupport.swift */; };
 		229E39871C109BCD00098457 /* ShareViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 229E39861C109BCD00098457 /* ShareViewControllerTests.m */; };
 		22B6924F1C151891002636B9 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B6924E1C151891002636B9 /* Note.m */; };
+		22B963221C4D4E6B00AFF4F4 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223AD2F91B2F2C20003965FA /* MasterViewController.m */; };
+		22B963231C4D4ED600AFF4F4 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22BEA6F31C065FB200EE225F /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BEA6F21C065FB200EE225F /* ShareViewController.m */; };
 		22BEA6F51C065FB200EE225F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BEA6F41C065FB200EE225F /* MainInterface.storyboard */; };
 		22BEA6F81C065FB200EE225F /* BlocNotesShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22BEA6ED1C065FB200EE225F /* BlocNotesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22D4BFAC1B4EAC49007D4E03 /* DetailViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D4BFAB1B4EAC49007D4E03 /* DetailViewControllerTests.m */; };
-		22DFA4D21C08DACA00115092 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260A1B331693005F3421 /* NoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E526091B331693005F3421 /* NoteStore.m */; };
 		22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5260B1B334D7B005F3421 /* NoteStoreTests.m */; };
+		22E861701C4D3CEA00AFBEE9 /* ICloudSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8616F1C4D3CEA00AFBEE9 /* ICloudSupportTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,8 @@
 		223AD3041B2F2C20003965FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		223AD30A1B2F2C20003965FA /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223AD30F1B2F2C20003965FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		226E522A1C495C3200653358 /* BlocNotes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlocNotes-Bridging-Header.h"; sourceTree = "<group>"; };
+		226E522B1C495C3200653358 /* ICloudSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICloudSupport.swift; sourceTree = "<group>"; };
 		229E39861C109BCD00098457 /* ShareViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewControllerTests.m; sourceTree = "<group>"; };
 		22B6924D1C151891002636B9 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		22B6924E1C151891002636B9 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
@@ -95,6 +100,8 @@
 		22E526081B331693005F3421 /* NoteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteStore.h; sourceTree = "<group>"; };
 		22E526091B331693005F3421 /* NoteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStore.m; sourceTree = "<group>"; };
 		22E5260B1B334D7B005F3421 /* NoteStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteStoreTests.m; sourceTree = "<group>"; };
+		22E8616E1C4D3CE900AFBEE9 /* BlocNotesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlocNotesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		22E8616F1C4D3CEA00AFBEE9 /* ICloudSupportTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICloudSupportTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				22BEA6FE1C0660C100EE225F /* BlocNotes.entitlements */,
+				226E522A1C495C3200653358 /* BlocNotes-Bridging-Header.h */,
 				22E3D8301B30C0BE007DC7AA /* Model */,
 				223AD2F21B2F2C20003965FA /* AppDelegate.h */,
 				223AD2F31B2F2C20003965FA /* AppDelegate.m */,
@@ -230,6 +238,7 @@
 				223AD2F51B2F2C20003965FA /* BlocNotes.xcdatamodeld */,
 				22E526081B331693005F3421 /* NoteStore.h */,
 				22E526091B331693005F3421 /* NoteStore.m */,
+				226E522B1C495C3200653358 /* ICloudSupport.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				22E5260B1B334D7B005F3421 /* NoteStoreTests.m */,
+				22E8616F1C4D3CEA00AFBEE9 /* ICloudSupportTests.swift */,
+				22E8616E1C4D3CE900AFBEE9 /* BlocNotesTests-Bridging-Header.h */,
 			);
 			name = "Model Tests";
 			path = ../BlocNotes;
@@ -408,6 +419,7 @@
 				22E5260A1B331693005F3421 /* NoteStore.m in Sources */,
 				223AD2FA1B2F2C20003965FA /* MasterViewController.m in Sources */,
 				223AD2F41B2F2C20003965FA /* AppDelegate.m in Sources */,
+				226E522C1C495C3200653358 /* ICloudSupport.swift in Sources */,
 				223AD2F71B2F2C20003965FA /* BlocNotes.xcdatamodeld in Sources */,
 				223AD2F11B2F2C20003965FA /* main.m in Sources */,
 				2219B60A1C01685600611E00 /* ShareUtils.m in Sources */,
@@ -419,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223581461B4D8E360096646D /* AddNoteViewControllerTests.m in Sources */,
+				22E861701C4D3CEA00AFBEE9 /* ICloudSupportTests.swift in Sources */,
 				22E5260C1B334D7B005F3421 /* NoteStoreTests.m in Sources */,
 				229E39871C109BCD00098457 /* ShareViewControllerTests.m in Sources */,
 				22D4BFAC1B4EAC49007D4E03 /* DetailViewControllerTests.m in Sources */,
@@ -429,8 +442,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B963231C4D4ED600AFF4F4 /* NoteStore.m in Sources */,
+				22B963221C4D4E6B00AFF4F4 /* MasterViewController.m in Sources */,
 				22BEA6F31C065FB200EE225F /* ShareViewController.m in Sources */,
-				22DFA4D21C08DACA00115092 /* NoteStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +503,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -534,6 +550,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -556,15 +574,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BlocNotes/BlocNotes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = BlocNotes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.BlocNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlocNotes/BlocNotes-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -572,16 +594,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BlocNotes/BlocNotes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Timothy Pryor (W4A89F2JTU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = BlocNotes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.BlocNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlocNotes/BlocNotes-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -589,6 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -604,6 +630,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.medux.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlocNotes/BlocNotesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlocNotes.app/BlocNotes";
 			};
 			name = Debug;
@@ -612,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -623,6 +652,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.medux.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlocNotes/BlocNotesTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlocNotes.app/BlocNotes";
 			};
 			name = Release;
@@ -633,6 +663,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlocNotesShareExtension/BlocNotesShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -653,6 +684,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlocNotesShareExtension/BlocNotesShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = BlocNotesShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

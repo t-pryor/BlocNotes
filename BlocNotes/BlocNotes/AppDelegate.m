@@ -10,8 +10,11 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 #import "NoteStore.h"
+#import "BlocNotes-Swift.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
+
+//@property (nonatomic, strong) PersistentStack* persistentStack;
 
 @end
 
@@ -32,8 +35,16 @@
     // Initialize our Note Store
     [NoteStore sharedInstance];
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    id currentiCloudToken = fileManager.ubiquityIdentityToken;
+    
+    
+    
+    
+    
+    
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    id currentiCloudToken = fileManager.ubiquityIdentityToken;
+    
+    
     
     
     return YES;

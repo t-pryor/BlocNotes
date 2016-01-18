@@ -8,15 +8,15 @@
 
 #import "NoteStore.h"
 #import "Note.h"
-
+#import "BlocNotes-Swift.h"
 
 @interface NoteStore ()
 
 @property (readonly, nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (readonly, nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic) NSMutableArray *privateNotes;
 @property (nonatomic, strong) dispatch_queue_t concurrentNoteQueue;
+//@property (nonatomic, strong) ICloudSupport *ics;
 
 @end
 
@@ -196,7 +196,7 @@
 
 // The following code is Apple boilerplate
 
-//@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
@@ -206,8 +206,8 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    self.modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
     return _managedObjectModel;
 }
 
@@ -221,7 +221,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BlocNotes.sqlite"];
+    self.storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BlocNotes.sqlite"];
     
     
     
@@ -230,7 +230,7 @@
     
     NSDictionary *storeOptions = @{NSPersistentStoreUbiquitousContentNameKey: @"BlocNotesStore"};
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.storeURL options:storeOptions error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -257,7 +257,9 @@
     if (!coordinator) {
         return nil;
     }
+
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _managedObjectContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }

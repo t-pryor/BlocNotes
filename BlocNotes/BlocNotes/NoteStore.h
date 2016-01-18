@@ -16,7 +16,10 @@
 @interface NoteStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allNotes;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong) NSURL *storeURL;
+@property (nonatomic, strong) NSURL *modelURL;
 
 + (instancetype)sharedInstance;
 
