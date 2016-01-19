@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Tim Pryor. All rights reserved.
 //
 
+//@import BlocNotesEmbeddedFramework;
 #import "NoteStore.h"
 #import "Note.h"
 #import "BlocNotes-Swift.h"
