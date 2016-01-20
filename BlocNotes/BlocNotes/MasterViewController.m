@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSArray *filteredList;
 
 
-typedef NS_ENUM(NSInteger, NoteSearchScope)
+typedef NS_ENUM(NSInteger, NoteSearchScope)key
 {
     searchScopeTitle = 0,
     searchScopeNote = 1,
@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
         self.preferredContentSize = CGSizeMake(320.0, 600.0);
+        [NSMutableSet set];
     }
 }
 
