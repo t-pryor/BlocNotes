@@ -190,11 +190,72 @@
     self.privateNotes = array;
 }
 
+#pragma mark - Notification Observers
+
+- (void)subscribeToICloudNotifications
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [notificationCenter addObserver:self
+                      selector:@selector(storesWillChange:)
+                          name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+                        object:self.persistentStoreCoordinator];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(storesDidChange:)
+                               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+                             object:self.persistentStoreCoordinator];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
+                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                             object:self.persistentStoreCoordinator];
+}
+
+
+
+
+
+- (void)storesWillChange:(NSNotification *)notification
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    
+    
+    [context performBlockAndWait: ^{
+        NSError *error;
+        if ([context hasChanges]) {
+            BOOL success = [context save:&error];
+            
+            if (!success && error) {
+                NSLog(@"Save error: %@,", [error localizedDescription]);
+            } else {
+                [context reset];
+            }
+        }
+    }];
+    
+    // refresh your user interface?
+}
+
+
+- (void)storesDidChange:(NSNotification *)notification
+{
+    // refresh you user interface
+}
+
+
+- (void) persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)changeNotification
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    
+    [context performBlock:^{
+        [context mergeChangesFromContextDidSaveNotification:changeNotification];
+    }];
+}
+
+
 
 #pragma mark - Core Data stack
-
-
-// The following code is Apple boilerplate
 
 //@synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
