@@ -223,6 +223,9 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
 }
 
 
+
+
+
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
