@@ -62,6 +62,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     
     self.searchController.searchBar.delegate = self;
     
+
+    
     self.definesPresentationContext = YES;
 }
 
