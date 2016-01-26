@@ -63,6 +63,8 @@ typedef NS_ENUM(NSInteger, NoteSearchScope)
     self.searchController.searchBar.delegate = self;
     
 
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
     
     self.definesPresentationContext = YES;
 }

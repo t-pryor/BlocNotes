@@ -23,6 +23,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.detailTitleTextView.delegate = self;
+    
+    
     self.title = @"Note Details";
     
     // iOS7 adds content offset automatically to scroll views (which text views inherit from)
@@ -45,6 +48,7 @@
                                     action:@selector(sharePressed:)];
     
     self.navigationItem.rightBarButtonItem = shareButton;
+    
     
 }
 
@@ -187,6 +191,7 @@
     self.detailBodyTextView.editable = YES;
     [self.detailBodyTextView becomeFirstResponder];
 }
+
 
 
 @end

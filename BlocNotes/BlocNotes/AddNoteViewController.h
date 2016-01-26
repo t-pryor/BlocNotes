@@ -11,7 +11,7 @@
 
 @protocol AddNoteViewControllerDelegate;
 
-@interface AddNoteViewController : UIViewController
+@interface AddNoteViewController : UIViewController <UITextViewDelegate>
 
 /**
  Represents the new note being created.

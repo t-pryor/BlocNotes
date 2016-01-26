@@ -22,6 +22,10 @@
     
     self.navItem.title = @"New Note";
     
+    self.titleText.delegate = self;
+    self.bodyText.delegate = self;
+    
+    
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc]
                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                     target:self
@@ -78,7 +82,8 @@
 
 - (void)savePressed
 {
-    if ([self.titleText.text isEqualToString: @"Tap here to edit title"]) {
+    if ([self.titleText.text isEqualToString: @"Tap here to edit title"] ||
+        [self.titleText.text isEqualToString: @""]) {
         
         NSPredicate *p = [NSPredicate predicateWithFormat:@"title contains 'Untitled'"];
         NSArray *untitledNotes = [[NoteStore sharedInstance] searchResultsUsingPredicate:p];
@@ -94,7 +99,18 @@
         [self.currentNote setTitle:self.titleText.text];
     }
   
-    [self.currentNote setBody:self.bodyText.text];
+    
+    if ([self.bodyText.text isEqualToString:@"Tap here to add note details"] ||
+        [self.bodyText.text isEqualToString:@""])
+    {
+        [self.currentNote setBody:@"No note details entered"];
+        
+    } else {
+        [self.currentNote setBody:self.bodyText.text];
+    }
+    
+    
+    
     [self.currentNote setUrlString:nil];
     [self.delegate addNoteViewControllerDidSave];
 }
@@ -108,6 +124,15 @@
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView == self.titleText && [self.titleText.text isEqualToString: @"Tap here to edit title"]) {
+            self.titleText.text = @"";
+    } else if (textView == self.bodyText && [self.bodyText.text isEqualToString: @"Tap here to add note details"]) {
+        self.bodyText.text = @"";
+    }
+    return;
+}
 
 
 
