@@ -194,6 +194,7 @@
 
 - (void)subscribeToICloudNotifications
 {
+    
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
     [notificationCenter addObserver:self
